@@ -17,4 +17,8 @@ class Database{
 
        $this->pdo = new PDO(sprintf('mysql:host=%s;dbName=%s', $server, $dbName), $user, $pass);
     }
+
+    public function users(){
+        $includes = "/includes";
+    }
 }
