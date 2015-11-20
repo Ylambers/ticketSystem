@@ -19,6 +19,5 @@ class Database{
     }
 
     public function users(){
-        $includes = "/includes";
     }
 }
