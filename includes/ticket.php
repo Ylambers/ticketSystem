@@ -5,6 +5,12 @@
  * Date: 3-12-2015
  * Time: 18:17
  */
+if($_SESSION["username"])
+{
+    session_destroy();
+    exit;
+}
+
 require_once('database.php');
     if (isset($_POST['ticket'])) {
         $problem = mysqli_real_escape_string($db, $_POST['problemname']);
