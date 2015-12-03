@@ -14,8 +14,8 @@ require_once('database.php');
 
         $error = 0;
 
-        if(strlen($problem) <= 5){$error++; echo "De korte omschrijving is te kort!";}
-        if(strlen($description) <= 20){$error++; echo "Graag meer als 20 tekens invoeren";}
+        if(strlen($problem) <= 5){$error++; echo "De korte omschrijving is te kort!". "<br />";}
+        if(strlen($description) <= 20){$error++; echo "Graag meer als 20 tekens invoeren" . "<br/>";}
 
         if ($error == 0){
             $query = "INSERT INTO ticket (problemname, description, user_id) VALUES ('$problem', '$description', '$user')";
@@ -24,19 +24,17 @@ require_once('database.php');
                 die('Error ' . mysqli_error($db));
             }
         }
-
         if(strlen($error) > 1){
             echo $error;
         }
-
     }
 
     echo '
-        <form action="ticket.php" method="post">
+        <form action="" method="post">
         <label>Korte Probleem beschrijving: </label> <br />
-        <input type="text" name="problemname" id="problemname"> </input> </br>
+        <input type="text" name="problemname" id="problemname" value="'.$problem.'"> </input> </br>
         <label>Complete probleem beschrijving: </label> <br />
-        <input type="text" name="description" id="description"> </input> <br />
+        <input type="text" name="description" id="description" value="'.$description.'"> </input> <br />
         <label>User</label> <br/>
         <input type="text" name="user_id" id="user_id"> </input> <br/>
         <input type="submit" name="ticket" value="toevoegen" />

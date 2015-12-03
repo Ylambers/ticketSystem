@@ -8,8 +8,6 @@
 
 session_start();
 include_once("includes/database.php");
-$db = new Database();
-$db->opendb();
 
 //if(isset($_POST['login'])){
 //    $email = $_POST['email'];
