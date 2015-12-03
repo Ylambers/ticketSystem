@@ -6,18 +6,12 @@
  * Time: 12:01
  */
 
-class Database{
-    private $pdo;
-    public function opendb(){
+$server = "localhost";
+$user = "root";
+$pass = "";
+$dbName = "ticketSystem";
 
-        $server = "localhost";
-        $user = "root";
-        $pass = "";
-        $dbName = "ticketSystem";
-
-       $this->pdo = new PDO(sprintf('mysql:host=%s;dbName=%s', $server, $dbName), $user, $pass);
-    }
-
-    public function users(){
-    }
+$db = new mysqli($server, $user, $pass, $dbName);
+if ($db->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $db->connect_errno . ") " . $db->connect_error;
 }

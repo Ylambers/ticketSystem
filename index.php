@@ -8,16 +8,13 @@
 
 session_start();
 include_once("includes/database.php");
-include_once("includes/security.php");
 $db = new Database();
 $db->opendb();
 
-if(isset($_POST['login'])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $security->checkLogin($email,$password);
-}
+//if(isset($_POST['login'])){
+//    $email = $_POST['email'];
+//    $password = $_POST['password'];
+//}
 
 ?>
 
