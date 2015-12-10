@@ -9,7 +9,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$dbName = "ticketSystem";
+$dbName = "stenden_ehelp";
 
 $db = new mysqli($server, $user, $pass, $dbName);
 if ($db->connect_errno) {

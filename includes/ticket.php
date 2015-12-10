@@ -5,25 +5,32 @@
  * Date: 3-12-2015
  * Time: 18:17
  */
-if($_SESSION["username"])
-{
-    session_destroy();
-    exit;
+include_once('database.php');
+session_start();
+if(!empty($_SESSION['username'])){
+    echo "Welkom terug ". $_SESSION['username'];
+}else{
+    header('location: ../index.php');
 }
 
+$email = $_SESSION['email'];
+$user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
+$result = mysqli_query($db, $user_email);
+$row = mysqli_fetch_assoc($result);
+$userId = $row['id'];
+
+$problem = '';
+$description = '';
 require_once('database.php');
     if (isset($_POST['ticket'])) {
-        $problem = mysqli_real_escape_string($db, $_POST['problemname']);
         $description = mysqli_real_escape_string($db, $_POST['description']);
-        $user = mysqli_real_escape_string($db, $_POST['user_id']);
-
+        $customer = $userId;
         $error = 0;
 
-        if(strlen($problem) <= 5){$error++; echo "De korte omschrijving is te kort!". "<br />";}
         if(strlen($description) <= 20){$error++; echo "Graag meer als 20 tekens invoeren" . "<br/>";}
 
         if ($error == 0){
-            $query = "INSERT INTO ticket (problemname, description, user_id) VALUES ('$problem', '$description', '$user')";
+            $query = "INSERT INTO ticket (description, idcustomer) VALUES ('$description', '$customer')";
             if (!mysqli_query($db, $query)) {
                 die('Error ' . mysqli_error($db));
             }else{
@@ -38,9 +45,7 @@ require_once('database.php');
 
     echo '
         <form action="" method="post">
-        <label>Korte Probleem beschrijving: </label> <br />
-        <input type="text" name="problemname" id="problemname" value="'.$problem.'"> </input> </br>
-        <label>Complete probleem beschrijving: </label> <br />
+        <label>Probleem beschrijving: </label> <br />
         <input type="text" name="description" id="description" value="'.$description.'"> </input> <br />
         <input type="submit" name="ticket" value="toevoegen" />
         </form>
@@ -48,5 +53,3 @@ require_once('database.php');
 
 
 mysqli_close($db);
-
-?>

@@ -8,20 +8,21 @@
 
 session_start();
 include_once("includes/database.php");
+
 if(isset($_POST['login'])){
-    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
     $pass = mysqli_real_escape_string($db, $_POST['password']);
 
-    $query_user = "SELECT * FROM user WHERE username='".$username."' AND password='".$pass."' LIMIT 1";
+    $query_user = "SELECT * FROM user WHERE email='".$email."' AND password='".$pass."' LIMIT 1";
 
+    echo $query_user;
     $runUser = mysqli_query($db, $query_user);
     $checkUser = mysqli_num_rows($runUser);
 
     if($checkUser > 0){
-        $_SESSION['username'] = $username;
-//        header('location: includes/ticket.php');
+        $_SESSION['email'] = $email;
+        header('location: includes/ticket.php');
         echo "succes";
-        include_once('includes/ticket.php');
     }
 }
 
@@ -30,12 +31,12 @@ echo '
     <form action="" method="post">
 
         Gebruikersnaam<br>
-        <input type="text" name="username">
+        <input type="text" name="email">
         <br>
         Password:<br>
         <input type="password" name="password">
         <br><br>
-        <input type="submit" value="Submit" name="login">
+        <input type="submit" value="Inloggen" name="login">
 
     </form>
 ';
