@@ -7,6 +7,19 @@
  */
 include_once('database.php');
 session_start();
+$email = $_SESSION['email'];
+$user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
+$result = mysqli_query($db, $user_email);
+$row = mysqli_fetch_assoc($result);
+$userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
+$role = $row['role'];
+
+
+if(!empty($_SESSION['email'])){
+    echo "Welkom terug ". $userName;;
+}else{
+    header('location: ../index.php');
+}
 
 $email = $_SESSION['email'];
 $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
@@ -14,13 +27,9 @@ $result = mysqli_query($db, $user_email);
 $row = mysqli_fetch_assoc($result);
 $userId = $row['id'];
 $userRole = $row['role'];
-$userName = $row['firstname'] ." ". $row['lastname'];
+$userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 
-if(!empty($_SESSION['email'])){
-    echo "Welkom terug ". $userName;;
-}else{
-    header('location: ../index.php');
-}
+
 //User information
 
 $problem = '';
@@ -74,12 +83,23 @@ if($userRole == 1){
       ';
 }
 
-
-
 if($userRole == 2){
-    echo '
-        <form
-    ';
+    $queryTicket = "SELECT * FROM ticket  ORDER BY created_at ";
+    $resultTicket = mysqli_query($db, $queryTicket);
+
+    $urgentieLevelQuery = "SELECT * FROM urgentieLevel";
+    $returnUrgentieLevel = mysqli_query($db, $urgentieLevelQuery);
+    $rowUrgentieLevel = mysqli_fetch_array($returnUrgentieLevel);
+    $nameUrgentieLevel = $rowUrgentieLevel['name'];
+
+    while($row = mysqli_fetch_array($resultTicket)){
+        echo $row['created_at']. "<br/>";
+        echo $rowUrgentieLevel['name'];
+        echo $row['customer']. "<br/>";
+        echo $row['description']. "<br/>";
+        echo '<a href="tickethandeling.php?id='.$row['idticket'].'"> Behandelen </a> <br/>';
+    }
+
 }
 
 

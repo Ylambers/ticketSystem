@@ -12,6 +12,10 @@ Author: Jordy Groote
 
 /* Containers */
 
+.ticketview{
+    border: 1px solid #000;
+}
+
 .container {
     margin: 0 auto;
     padding: 20px;
