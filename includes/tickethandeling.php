@@ -11,8 +11,9 @@ $email = $_SESSION['email'];
 $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
 $result = mysqli_query($db, $user_email);
 $row = mysqli_fetch_assoc($result);
-$userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
+$userName = $row['firstname'] ." ". $row['lastname'];
 $role = $row['role'];
+
 
 if(!empty($_SESSION['email'])){
     echo "Welkom terug ". $userName;;
@@ -42,7 +43,7 @@ if ($role == 2){
 
         //if(strlen($ticketSolution <= 10)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
 
-        $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus' WHERE idticket='$id'  ";
+        $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName' WHERE idticket='$id'  ";
         echo $updateTicket . "<br />";
         if (!mysqli_query($db, $updateTicket)) {
             die('Error ' . mysqli_error($db));
@@ -68,6 +69,7 @@ if ($role == 2){
             <option value="'.$rowStatus['active'].'">'.$rowStatus['name'].' </option>
         ';
     }
+
 
     echo'
             </select>
