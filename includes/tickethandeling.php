@@ -41,9 +41,12 @@ if ($role == 2){
         $ticketStatus = mysqli_real_escape_string($db, $_POST['status']);
         $ticketSolution = mysqli_real_escape_string($db, $_POST['solution']);
 
+        //String date timestamp
+        $date = date("F j, Y, g:i a");
+        $sqlDate = date('Y-m-d', strtotime($date));
         //if(strlen($ticketSolution <= 10)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
 
-        $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName' WHERE idticket='$id'  ";
+        $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName', fixed_at='$sqlDate'  WHERE idticket='$id'  ";
         echo $updateTicket . "<br />";
         if (!mysqli_query($db, $updateTicket)) {
             die('Error ' . mysqli_error($db));
@@ -57,6 +60,7 @@ if ($role == 2){
     echo "Prioriteid ".$nameUrgentieLevel. "<br/>";
     echo "Beschrijving " .$row['description'] . "<br/>";
     echo "Oplossing " .$row['solution'] . "<br/>";
+    echo "Tijdgefixt " .$row['fixed_at'] . "<br/>";
     echo '
         <form action="" method="POST">
         <label> Ticket status </label>
