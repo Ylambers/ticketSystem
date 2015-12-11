@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Gegenereerd op: 11 dec 2015 om 15:35
+-- Gegenereerd op: 11 dec 2015 om 19:35
 -- Serverversie: 5.6.25
 -- PHP-versie: 5.6.11
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `phone`, `image`, `role`, `email`, `password`) VALUES
-(2, 'yaron', 'lambers', 620923399, '', 1, 'y.lambers@outlook.com', 'admin2');
+(2, 'yaron', 'lambers', 620923399, '', 2, 'y.lambers@outlook.com', 'admin2');
 
 --
 -- Indexen voor geëxporteerde tabellen
