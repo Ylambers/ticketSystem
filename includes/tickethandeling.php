@@ -42,12 +42,11 @@ if ($role == 2){
         $ticketSolution = mysqli_real_escape_string($db, $_POST['solution']);
 
         //String date timestamp
-        $date = date("F j, Y, g:i a");
-        $sqlDate = date('Y-m-d', strtotime($date));
+        $date = date("d.m.y");
+        $sqlDate = date('d.m.y', strtotime($date));
         //if(strlen($ticketSolution <= 10)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
 
         $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName', fixed_at='$sqlDate'  WHERE idticket='$id'  ";
-        echo $updateTicket . "<br />";
         if (!mysqli_query($db, $updateTicket)) {
             die('Error ' . mysqli_error($db));
         }else {
