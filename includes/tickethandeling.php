@@ -19,6 +19,7 @@ if(!empty($_SESSION['email'])){
 }else{
     header('location: ../index.php');
 }
+
 if ($role == 2){
     $id = $_GET['id'];
     $query = "SELECT * FROM ticket WHERE idticket='$id' ";
@@ -33,9 +34,28 @@ if ($role == 2){
     $statusQ = "SELECT * FROM status";
     $returnStatus = mysqli_query($db, $statusQ);
 
+    $error = 0;
+    if(isset($_POST['submit'])){
+
+        $ticketStatus = mysqli_real_escape_string($db, $_POST['status']);
+        $ticketSolution = mysqli_real_escape_string($db, $_POST['solution']);
+
+        //if(strlen($ticketSolution <= 10)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
+
+        $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus' WHERE idticket='$id'  ";
+        echo $updateTicket . "<br />";
+        if (!mysqli_query($db, $updateTicket)) {
+            die('Error ' . mysqli_error($db));
+        }else {
+            echo "Succesvol verzonden!";
+        }
+    }
+
     echo "Ticket aangemaakt op ".$row['created_at']."<br/>";
     echo "Maker ticked ".$row['customer']. "<br/>";
     echo "Prioriteid ".$nameUrgentieLevel. "<br/>";
+    echo "Beschrijving " .$row['description'] . "<br/>";
+    echo "Oplossing " .$row['solution'] . "<br/>";
     echo '
         <form action="" method="POST">
         <label> Ticket status </label>
@@ -45,14 +65,14 @@ if ($role == 2){
 
     while ($rowStatus = mysqli_fetch_array($returnStatus)){
         echo '
-            <option name="'.$rowStatus['active'].'">'.$rowStatus['name'].' </option>
+            <option value="'.$rowStatus['active'].'">'.$rowStatus['name'].' </option>
         ';
     }
 
     echo'
             </select>
             <label>Oplossing:</label>
-            <input type="text" name="solution" />
+            <input type="text" name="solution" value="'.$ticketSolution.'" />
             <input type="submit" name="submit" value="Verzenden">
         </form>
     ';
