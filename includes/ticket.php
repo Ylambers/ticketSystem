@@ -7,8 +7,9 @@
  */
 include_once('database.php');
 session_start();
-if(!empty($_SESSION['username'])){
-    echo "Welkom terug ". $_SESSION['username'];
+
+if(!empty($_SESSION['email'])){
+    echo "Welkom terug ". $_SESSION['email'];
 }else{
     header('location: ../index.php');
 }

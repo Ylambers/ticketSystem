@@ -15,14 +15,12 @@ if(isset($_POST['login'])){
 
     $query_user = "SELECT * FROM user WHERE email='".$email."' AND password='".$pass."' LIMIT 1";
 
-    echo $query_user;
     $runUser = mysqli_query($db, $query_user);
     $checkUser = mysqli_num_rows($runUser);
 
     if($checkUser > 0){
         $_SESSION['email'] = $email;
         header('location: includes/ticket.php');
-        echo "succes";
     }
 }
 
@@ -30,8 +28,8 @@ echo '
     <h1>Login form</h1>
     <form action="" method="post">
 
-        Gebruikersnaam<br>
-        <input type="text" name="email">
+        Email<br>
+        <input type="email" name="email">
         <br>
         Password:<br>
         <input type="password" name="password">

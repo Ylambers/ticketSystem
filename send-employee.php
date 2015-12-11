@@ -1,5 +1,5 @@
 <?php
-require_once "db-connection.php";
+require_once "includes/database.php";
 
 $cleanData = array();
 foreach ($_POST as $key => $item){
@@ -17,7 +17,7 @@ $uploadedImage = $_FILES['post_image']['tmp_name'];
 $newImage = 'content/' . $_FILES['post_image']['name'];
 move_uploaded_file($uploadedImage, $newImage);
 
-$query = "INSERT INTO employee (name, image, email, phone, role, role_role_id)
+$query = "INSERT INTO user (name, image, email, phone, role, role_role_id)
 VALUES ('$cleanData[post_medewerker]', '$newImage', '$cleanData[post_email]', '$cleanData[post_phone]', '$cleanData[post_role]', 1)";
 
 mysqli_query($conn, $query);
