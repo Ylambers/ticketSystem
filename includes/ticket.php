@@ -6,13 +6,6 @@
  * Time: 18:17
  */
 include_once('database.php');
-session_start();
-$email = $_SESSION['email'];
-$user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
-$result = mysqli_query($db, $user_email);
-$row = mysqli_fetch_assoc($result);
-$userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
-$role = $row['role'];
 
 
 if(!empty($_SESSION['email'])){

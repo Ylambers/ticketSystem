@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: yaronlambers
@@ -6,22 +7,16 @@
  * Time: 12:41
  */
 include_once('database.php');
-session_start();
-$email = $_SESSION['email'];
-$user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
-$result = mysqli_query($db, $user_email);
-$row = mysqli_fetch_assoc($result);
-$userName = $row['firstname'] ." ". $row['lastname'];
-$role = $row['role'];
-
 
 if(!empty($_SESSION['email'])){
-    echo "Welkom terug ". $userName;;
+    echo "Welkom terug ". $userName;
+    echo '<a href="ticket.php"> Alle tickets </a>' . "<br/>";
 }else{
     header('location: ../index.php');
 }
 
 if ($role == 2){
+
     $id = $_GET['id'];
     $query = "SELECT * FROM ticket WHERE idticket='$id' ";
     $return = mysqli_query($db, $query);
@@ -35,8 +30,9 @@ if ($role == 2){
     $statusQ = "SELECT * FROM status";
     $returnStatus = mysqli_query($db, $statusQ);
 
-    $error = 0;
+
     if(isset($_POST['submit'])){
+        $error = 0; /* Error is standaard 0 om door de check heen te komen */
 
         $ticketStatus = mysqli_real_escape_string($db, $_POST['status']);
         $ticketSolution = mysqli_real_escape_string($db, $_POST['solution']);
@@ -44,13 +40,17 @@ if ($role == 2){
         //String date timestamp
         $date = date("d.m.y");
         $sqlDate = date('d.m.y', strtotime($date));
-        //if(strlen($ticketSolution <= 10)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
+        if(strlen($ticketSolution <= 20)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
+        if(empty($ticketStatus)){$error++; echo "Graag een ticketstatus invoeren!". "<br/>";}
 
         $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName', fixed_at='$sqlDate'  WHERE idticket='$id'  ";
-        if (!mysqli_query($db, $updateTicket)) {
-            die('Error ' . mysqli_error($db));
-        }else {
-            echo "Succesvol verzonden!";
+        if($error == 0){
+            if (!mysqli_query($db, $updateTicket)) {
+                die('Error ' . mysqli_error($db));
+            }else {
+                echo "Succesvol verzonden!";
+                $ticketSolution = '';
+            }
         }
     }
 
@@ -64,6 +64,7 @@ if ($role == 2){
         <form action="" method="POST">
         <label> Ticket status </label>
         <select name="status" />
+        <option> </option>
         ';
 
 
