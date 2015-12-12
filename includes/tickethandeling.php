@@ -98,9 +98,9 @@ if ($role == 2){
     echo '
         <form method="POST">
          <label>Oplossing</label> <br/>
-         <textarea name="solution" rows="" cols="100">  </textarea> <br/>
+         <textarea class="form-control" name="solution" rows="" cols="100">  </textarea> <br/>
         <label> Ticket status </label>
-        <select name="status" />
+        <select name="status" class="form-control"/>
         <option>  </option>
         ';
     echo '</tr>';
@@ -112,7 +112,7 @@ if ($role == 2){
     echo'
             </select>
 
-            <input type="submit" name="submit" value="Verzenden"> <br/>
+            <input class="btn btn-default type="submit" name="submit" value="Verzenden"> <br/>
         </form>
     ';
 
