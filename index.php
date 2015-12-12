@@ -1,40 +1,30 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Yaron
- * Date: 20-11-2015
- * Time: 12:00
- */
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="../css/login_style.css">
 
-session_start();
-include_once("includes/database.php");
+    </head>
+    <body>
+    <!--Pulling Awesome Font -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-5 col-md-3">
+                <form class="form-login" action="includes/login.php" method="post">
+                    <h4>Welcome back.</h4>
+                    <input type="email" id="userName" class="form-control input-sm chat-input" placeholder="email" name="email" />
+                    </br>
+                    <input type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" name="password" />
+                    </br>
+                    <input type="submit" name="login"  class="btn btn-primary btn-md" value="Login"/>
+                </form>
+            </div>
+        </div>
+    </div>
 
-if(isset($_POST['login'])){
-    $email = mysqli_real_escape_string($db, $_POST['email']);
-    $pass = mysqli_real_escape_string($db, $_POST['password']);
-
-    $query_user = "SELECT * FROM user WHERE email='".$email."' AND password='".$pass."' LIMIT 1";
-
-    $runUser = mysqli_query($db, $query_user);
-    $checkUser = mysqli_num_rows($runUser);
-
-    if($checkUser > 0){
-        $_SESSION['email'] = $email;
-        header('location: includes/ticket.php');
-    }
-}
-
-echo '
-    <h1>Login form</h1>
-    <form action="" method="post">
-
-        Email<br>
-        <input type="email" name="email">
-        <br>
-        Password:<br>
-        <input type="password" name="password">
-        <br><br>
-        <input type="submit" value="Inloggen" name="login">
-
-    </form>
-';
+    </body>
+</html>

@@ -1,3 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
 <?php
 
 /**
@@ -7,6 +17,15 @@
  * Time: 12:41
  */
 include_once('database.php');
+session_start();
+$email = $_SESSION['email'];
+$user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
+$result = mysqli_query($db, $user_email);
+$row = mysqli_fetch_assoc($result);
+$userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
+$id = $_GET['id'];
+$role = $row['role'];
+
 
 if(!empty($_SESSION['email'])){
     echo "Welkom terug ". $userName;
@@ -54,12 +73,25 @@ if ($role == 2){
         }
     }
 
-    echo "Ticket aangemaakt op ".$row['created_at']."<br/>";
-    echo "Maker ticked ".$row['customer']. "<br/>";
-    echo "Prioriteid ".$nameUrgentieLevel. "<br/>";
-    echo "Beschrijving " .$row['description'] . "<br/>";
-    echo "Oplossing " .$row['solution'] . "<br/>";
-    echo "Tijdgefixt " .$row['fixed_at'] . "<br/>";
+    echo '
+    <table class="table table-hover">
+     <tr>
+        <th>Ticket aangemaakt op </th>
+        <th>Maker ticked</th>
+        <th>Prioriteid</th>
+        <th>Beschrijving </th>
+        <th>Oplossing </th>
+        <th>Tijdgefixt </th>
+    </tr>
+    ';
+    echo '<tr>';
+    echo "<th>".$row['created_at']."<th/>";
+    echo "<th>".$row['customer']. "<th/>";
+    echo "<th>".$nameUrgentieLevel. "<th/>";
+    echo "<th>".$row['description'] . "<th/>";
+    echo "<th>" .$row['solution'] . "<th/>";
+    echo "<th>" .$row['fixed_at'] . "<th/>";
+    echo '</tr>';
     echo '
         <form action="" method="POST">
         <label> Ticket status </label>
@@ -67,7 +99,7 @@ if ($role == 2){
         <option> </option>
         ';
 
-
+    echo '</tr>';
     while ($rowStatus = mysqli_fetch_array($returnStatus)){
         echo '
             <option value="'.$rowStatus['active'].'">'.$rowStatus['name'].' </option>
@@ -78,7 +110,7 @@ if ($role == 2){
     echo'
             </select>
             <label>Oplossing:</label>
-            <input type="text" name="solution" value="'.$ticketSolution.'" />
+            <input type="textarea" name="solution" value="'.$ticketSolution.'" />
             <input type="submit" name="submit" value="Verzenden">
         </form>
     ';

@@ -1,3 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<h1> Tickets </h1>
+
 <?php
 /**
  * Created by PhpStorm.
@@ -6,10 +19,16 @@
  * Time: 18:17
  */
 include_once('database.php');
-
+session_start();
+$email = $_SESSION['email'];
+$user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
+$result = mysqli_query($db, $user_email);
+$row = mysqli_fetch_assoc($result);
+$userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 
 if(!empty($_SESSION['email'])){
-    echo "Welkom terug ". $userName;;
+    echo "Welkom terug ". $userName;
+    echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
 }else{
     header('location: ../index.php');
 }
@@ -84,15 +103,27 @@ if($userRole == 2){
     $returnUrgentieLevel = mysqli_query($db, $urgentieLevelQuery);
     $rowUrgentieLevel = mysqli_fetch_array($returnUrgentieLevel);
     $nameUrgentieLevel = $rowUrgentieLevel['name'];
-
+    echo '
+    <table class="table table-hover">
+    <tr>
+        <th>Datum</th>
+        <th>Prioriteit</th>
+        <th>Customer Email</th>
+        <th>Description</th>
+        <th>Behandelen</th>
+    <tr>
+    ';
     while($row = mysqli_fetch_array($resultTicket)){
-        echo $row['created_at']. "<br/>";
-        echo $rowUrgentieLevel['name'];
-        echo $row['customer']. "<br/>";
-        echo $row['description']. "<br/>";
+        echo '<tr>';
+        echo "<th>".$row['created_at']. "</th>";
+        echo "<th>".$rowUrgentieLevel['name']. "</th>";
+        echo "<th>".$row['customer']. "</th>";
+        echo "<th>".$row['description']. "<th/>";
         echo '<a href="tickethandeling.php?id='.$row['idticket'].'"> Behandelen </a> <br/>';
-    }
 
+        echo '</tr>';
+    }
+    echo '</table>';
 }
 
 

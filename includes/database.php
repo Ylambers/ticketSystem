@@ -15,12 +15,7 @@
         echo "Failed to connect to MySQL: (" . $db->connect_errno . ") " . $db->connect_error;
     }
 
-    session_start();
-    $email = $_SESSION['email'];
-    $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
-    $result = mysqli_query($db, $user_email);
-    $row = mysqli_fetch_assoc($result);
-    $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
+
 
 
 
