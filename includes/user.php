@@ -5,6 +5,7 @@
     <title>table</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php
@@ -143,6 +144,7 @@ if($role == 1){
     }
 
     echo '
+<div class="containerForm">
     <form method="POST" role="form">
         <div class="form-group">
             <label>Voornaam</label>
@@ -156,5 +158,6 @@ if($role == 1){
             <input type="submit" class="btn btn-default" name="updateUser" value="update gebruiker" />
         </div>
     </form>
+    </div>
     ';
 }

@@ -5,8 +5,11 @@
     <title>table</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<div class="menubar">
 <a href="index.php">terug</a>
+</div>
 <body>
 <?php
 /**
@@ -70,6 +73,7 @@ if($count == 0){
 }
 
 echo '
+<div class="containerForm">
    <form role="form" method="post">
       <div class="form-group">
         <label for="firstname">Voornaam:</label>
@@ -93,4 +97,5 @@ echo '
         <button type="submit" name="register" class="btn btn-default">Submit</button>
       </div>
     </form>
+</div>
 ';

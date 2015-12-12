@@ -5,7 +5,7 @@
     <title>template</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php
@@ -117,7 +117,7 @@ if ($role == 2){
     echo'
             </select>
 
-            <input class="btn btn-default type="submit" name="submit" value="Verzenden"> <br/>
+            <input class="btn btn-default" type="submit" name="submit" value="Verzenden"> <br/>
         </form>
         <br/>
         </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 dec 2015 om 12:21
+-- Gegenereerd op: 13 dec 2015 om 00:25
 -- Serverversie: 10.0.17-MariaDB
 -- PHP-versie: 5.6.14
 
@@ -54,7 +54,7 @@ CREATE TABLE `ticket` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `urgentieLevel` int(3) NOT NULL,
   `description` varchar(45) NOT NULL,
-  `employee` varchar(45) NOT NULL,
+  `employee` varchar(45) DEFAULT NULL,
   `fixed_at` varchar(14) DEFAULT NULL,
   `solution` longtext,
   `active` int(2) NOT NULL
@@ -65,16 +65,8 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`idticket`, `customer`, `idcustomer`, `created_at`, `urgentieLevel`, `description`, `employee`, `fixed_at`, `solution`, `active`) VALUES
-(20, 'y.lambers@outlook.com', 2, '2015-12-11 13:31:20', 0, 'hallofhhhhh', '', NULL, NULL, 0),
-(21, 'y.lambers@outlook.com', 2, '2015-12-11 14:15:25', 0, 'dfsdfsdfsdfasdfadfasdfadfasdf', 'yaron lambers', NULL, 'hallohjhbhhkjkjhj', 3),
-(22, 'y.lambers@outlook.com', 2, '2015-12-11 19:26:40', 0, 'dfsdfsdfsdfasdfadfasdfadfasdf', 'yaron lambers', '11.12.15', 'fg', 0),
-(23, 'y.lambers@outlook.com', 2, '2015-12-11 18:58:31', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 'yaron lambers', '11.12.15', 'De computer is geinstalleeerd en wij zijn heel trots', 0),
-(24, 'y.lambers@outlook.com', 2, '2015-12-11 10:19:43', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
-(25, 'y.lambers@outlook.com', 2, '2015-12-11 09:47:27', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
-(26, 'y.lambers@outlook.com', 2, '2015-12-11 09:47:38', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
-(27, 'y.lambers@outlook.com', 2, '2015-12-11 19:16:48', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 'yaron lambers', '11.12.15', 'fgdfgdfgdfg', 0),
-(28, 'y.lambers@outlook.com', 2, '2015-12-11 10:28:56', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
-(29, 'y.lambers@outlook.com', 2, '2015-12-11 22:12:42', 1, 'sdfdsfsdfdfsdfsdfsdfsfdsdfsdf', '', NULL, NULL, 0);
+(1, 'y.lambers@outlook.com', 3, '2015-12-12 23:24:00', 4, 'Hallo mijn fiets is stuk :(', 'yaron lambers<br/>', '13.12.15', '  Band is geplakt!', 3),
+(2, 'y.lambers@outlook.com', 3, '2015-12-12 22:28:46', 2, ' Hallo mijn fiets is stuk :(', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -107,8 +99,7 @@ CREATE TABLE `user` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `phone` int(14) NOT NULL,
-  `image` longtext NOT NULL,
-  `role` int(2) NOT NULL,
+  `role` int(2) NOT NULL DEFAULT '1',
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -117,9 +108,9 @@ CREATE TABLE `user` (
 -- Gegevens worden geëxporteerd voor tabel `user`
 --
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `phone`, `image`, `role`, `email`, `password`) VALUES
-(2, 'yaron', 'lambers', 620923399, '', 2, 'y.lambers@outlook.com', 'admin2'),
-(3, 'Menno', 'godeke', 1234567890, '', 2, 'y.lambers@outlook.com', 'admin2');
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `phone`, `role`, `email`, `password`) VALUES
+(3, 'yaron', 'lambers', 620923399, 2, 'y.lambers@outlook.com', 'c84258e9c39059a89ab77d846ddab909'),
+(4, 'Leonardo', 'Davinci', 547649948, 1, 'fietsje@hotmail.com', 'c84258e9c39059a89ab77d846ddab909');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -162,7 +153,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT voor een tabel `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT voor een tabel `urgentielevel`
 --
@@ -172,7 +163,7 @@ ALTER TABLE `urgentielevel`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
