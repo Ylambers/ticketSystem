@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <body>
-<div class="menubar">
-<a href="user.php">Terug</a>
-</div>
 <?php
 /**
  * Created by PhpStorm.
@@ -27,6 +24,17 @@ $row = mysqli_fetch_assoc($result);
 $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 $id = $_GET['id'];
 $role = $row['role'];
+
+if(!empty($_SESSION['email'])){
+    echo '<div class="menubar">';
+    echo "<h2>"."Welkom ". $userName."</h2>"."<br/>";
+    echo '<a href="ticket.php">Home </a> ';
+    echo '<a class="menu" href="ticket.php"> Alle users </a>';
+    echo '<a href="logout.php">Uitloggen </a>';
+    echo '</div>';
+}else{
+    header('location: ../index.php');
+}
 
 if($role == 2){
     if(isset($_POST['updateUser'])){

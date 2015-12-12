@@ -29,8 +29,10 @@ $role = $row['role'];
 
 if(!empty($_SESSION['email'])){
     echo '<div class="menubar">';
-    echo "<h2>"."Hallo ". $userName."</h2>";
+    echo "<h2>"."Welkom ". $userName."</h2>"."<br/>";
+    echo '<a href="ticket.php">Home </a> ';
     echo '<a class="menu" href="ticket.php"> Alle tickets </a>';
+    echo '<a href="logout.php">Uitloggen </a>';
     echo '</div>';
 }else{
     header('location: ../index.php');
@@ -98,6 +100,7 @@ if ($role == 2){
 
     echo '</tr>';
     echo '
+        <div class="containerForm">
         <form method="POST">
          <label>Oplossing</label> <br/>
          <textarea class="form-control" name="solution" rows="" cols="100">  </textarea> <br/>
@@ -116,6 +119,8 @@ if ($role == 2){
 
             <input class="btn btn-default type="submit" name="submit" value="Verzenden"> <br/>
         </form>
+        <br/>
+        </div>
     ';
 
 }

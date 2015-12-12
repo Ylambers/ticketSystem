@@ -27,13 +27,13 @@ $id = $row['id'];
 
 if(!empty($_SESSION['email'])){
     echo '<div class="menubar">';
-    echo "<h2>"."Welkom ". $userName."</h2>";
+    echo "<h2>"."Welkom ". $userName."</h2>"."<br/>";
     if($role == 2){
-        echo '<a href="user.php">Gebruikers bekijken </a> ' . "<br/>";
+        echo '<a href="user.php">Gebruikers bekijken </a> ';
     }else{
-        echo '<a href="user.php">Gegevens bewerken </a> ' . "<br/>";
+        echo '<a href="user.php">Gegevens bewerken </a> ';
     }
-    echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
+    echo '<a href="logout.php">Uitloggen </a> ';
     echo '</div>';
 }else{
     header('location: ../index.php');
