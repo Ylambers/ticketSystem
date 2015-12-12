@@ -7,6 +7,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </head>
+<a href="index.php">terug</a>
 <body>
 <?php
 /**
@@ -41,6 +42,7 @@ if (isset($_POST['register'])) {
     if(strlen($email) < 3){$error++; echo' Het emailadres is te kort!'."<br/>";}
     if(count($userEmail) > 0){$error++; echo 'Dit email adres bestaat al!' ."<br/>";}
     if($password != $password1){$error++; echo'De wachtwoorden zijn niet gelijk!'."<br/>";}
+    if(strlen($password < 5)){$error++; echo 'Het wachtwoord is te kort!'. "<br/>";}
 
     if($password == $password1){
         $pass = md5($password.$email.rand(1,999));
@@ -48,7 +50,7 @@ if (isset($_POST['register'])) {
     }
 
     if ($error == 0){
-        $query = "INSERT INTO user (firstname, lastname, phone, image, email, password) VALUES ('$firstname', '$lastname', '$phone', '$email', '$password' ,'$password1')";
+        $query = "INSERT INTO user (firstname, lastname, phone, email, password) VALUES ('$firstname', '$lastname', '$phone', '$email', '$password')";
         if (!mysqli_query($db, $query)) {
             die('Error ' . mysqli_error($db));
         }else{
@@ -87,7 +89,7 @@ echo '
         <input type="password" class="form-control" id="password" name="password">
 
         <label for="password">Wachtwoord bevesteging:</label>
-        <input type="password" class="form-control" id="password" name="password1">
+        <input type="password" class="form-control" id="password1" name="password1">
 
         <button type="submit" name="register" class="btn btn-default">Submit</button>
       </div>
