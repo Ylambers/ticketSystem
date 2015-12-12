@@ -122,7 +122,7 @@ if($userRole == 1){
         if($rowAll['active'] == 0){
             $active = 'In de wachtrij';
         }elseif($rowAll['active'] == 1){
-            $active = 'In behandeling';
+            $active = '<div class="progress"> '.'In behandeling';
         }elseif($rowAll['active'] == 3){
             $active = '<div class="done"> '.'Klaar'."</div>";
         }

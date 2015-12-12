@@ -1,3 +1,7 @@
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+
 <?php
 /**
  * Created by PhpStorm.
@@ -8,6 +12,4 @@
 
 session_start();
 session_destroy();
-
-
-echo 'Je bent uitgelogt. <a href="../index.php">Ga terug!</a>';
+header("Refresh:0; url=../index.php");
