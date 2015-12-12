@@ -22,32 +22,20 @@ $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
 $result = mysqli_query($db, $user_email);
 $row = mysqli_fetch_assoc($result);
 $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
+$role = $row['role'];
+$id = $row['id'];
 
 if(!empty($_SESSION['email'])){
     echo "<h2>"."Welkom terug ". $userName."</h2>";
-    echo '<a href="user.php">Gebruikers bekijken </a> ' . "<br/>";
+    if($role == 2){
+        echo '<a href="user.php">Gebruikers bekijken </a> ' . "<br/>";
+    }else{
+        echo '<a href="user.php">Gegevens bewerken </a> ' . "<br/>";
+    }
     echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
 }else{
     header('location: ../index.php');
 }
-
-/* Search function */
-echo '
-    <form action="" method="post">
-        <input type="text" name="search" placeholder="Zoek op naam" />
-        <input type="submit" value="zoeken" name="search"/>
-     </form> <br/>
-';
-if(isset($_POST['search'])){
-    $search = mysqli_real_escape_string($db, $_POST['search']);
-    $searchQ = "SELECT * FROM ticket WHERE customer like '$search'";
-    $searchResult = mysqli_query($db, $searchQ);
-
-    while($rowSearch = mysqli_fetch_array($searchResult)){
-        echo $rowSearch['customer'];
-    }
-}
-
 /* Get session info */
 $email = $_SESSION['email'];
 $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
@@ -79,6 +67,7 @@ if($userRole == 1){
             if (!mysqli_query($db, $query)) {
                 die('Error ' . mysqli_error($db));
             }else{
+                echo 'Probleem is toegevoegd en er wordt zo snel mogelijk naar gekeken';
                 $problem = '';
                 $description = '';
             }
@@ -89,11 +78,13 @@ if($userRole == 1){
     }
 
     echo '
-        <form action="" method="post">
-        <label>Probleem beschrijving: </label> <br />
-        <input type="text" name="description" id="description" value="'.$description.'"> </input> <br />
-        <label>Hoe dringend is het?</label>
-        <select name="level">
+        <form action="" method="post" role="form">
+        <div class="form-group">
+            <label for="description">Probleem beschrijving: </label> <br />
+            <input type="text" class="form-control" name="description" id="description" value="'.$description.'"> </input> <br />
+            <div class="dropdown">
+            <label>Hoe dringend is het?</label>
+            <select name="level">
         ';
 
     $queryUrgentieLevel = "SELECT * FROM urgentieLevel";
@@ -105,12 +96,54 @@ if($userRole == 1){
 
     echo '
         </select>
-        <input type="submit" name="ticket" value="toevoegen" />
+        <input class="btn btn-default" type="submit" name="ticket" value="toevoegen" />
+        </div>
         </form>
       ';
+
+    $allTickets = "SELECT * FROM ticket WHERE idcustomer='$id'";
+    $queryAll = mysqli_query($db, $allTickets);
+    echo '
+    <table class="table table-hover">
+    <tr>
+        <th>Datum</th>
+        <th>Aangemaakt op</th>
+        <th>Beschrijving probleem</th>
+        <th>Behandelaar</th>
+        <th>Datum oplossing</th>
+        <th>Beschrijving oplossing</th>
+    <tr>
+    ';
+    while($rowAll = mysqli_fetch_array($queryAll)){
+        echo '<tr>';
+        echo "<th>".$rowAll['description'] ."</th>";
+        echo "<th>".$rowAll['created_at'] ."</th>";
+        echo "<th>".$rowAll['description'] ."</th>";
+        echo "<th>".$rowAll['employee'] ."</th>";
+        echo "<th>".$rowAll['fixed_at'] ."</th>";
+        echo "<th>".$rowAll['solution'] ."</th>";
+        echo '</tr>';
+    }
 }
 
 if($userRole == 2){
+    /* Search function */
+    echo '
+    <form action="" method="post">
+        <input type="text" name="search" placeholder="Zoek op naam" />
+        <input type="submit" value="zoeken" name="search"/>
+     </form> <br/>
+';
+    if(isset($_POST['search'])){
+        $search = mysqli_real_escape_string($db, $_POST['search']);
+        $searchQ = "SELECT * FROM ticket WHERE customer like '$search'";
+        $searchResult = mysqli_query($db, $searchQ);
+
+        while($rowSearch = mysqli_fetch_array($searchResult)){
+            echo $rowSearch['customer'];
+        }
+    }
+
     $queryTicket = "SELECT * FROM ticket  ORDER BY created_at ";
     $resultTicket = mysqli_query($db, $queryTicket);
 

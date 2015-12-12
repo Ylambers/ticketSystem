@@ -68,8 +68,7 @@ if ($role == 2){
             if (!mysqli_query($db, $updateTicket)) {
                 die('Error ' . mysqli_error($db));
             }else {
-                echo "Succesvol verzonden!";
-                $ticketSolution = '';
+                header("Refresh:0");
             }
         }
     }
