@@ -21,6 +21,9 @@
                     <input type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" name="password" />
                     </br>
                     <input type="submit" name="login"  class="btn btn-primary btn-md" value="Login"/>
+                    <a href="register.php">
+                        <input type="button" class="btn btn-primary btn-md" value="Registreren"/>
+                    </a>
                 </form>
             </div>
         </div>
