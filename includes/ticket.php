@@ -25,6 +25,7 @@ $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 
 if(!empty($_SESSION['email'])){
     echo "<h2>"."Welkom terug ". $userName."</h2>";
+    echo '<a href="user.php">Gebruikers bekijken </a> ' . "<br/>";
     echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
 }else{
     header('location: ../index.php');
