@@ -8,9 +8,6 @@
 
 </head>
 <body>
-
-
-
 <?php
 /**
  * Created by PhpStorm.
@@ -33,6 +30,24 @@ if(!empty($_SESSION['email'])){
     header('location: ../index.php');
 }
 
+/* Search function */
+echo '
+    <form action="" method="post">
+        <input type="text" name="search" placeholder="Zoek op naam" />
+        <input type="submit" value="zoeken" name="search"/>
+     </form> <br/>
+';
+if(isset($_POST['search'])){
+    $search = mysqli_real_escape_string($db, $_POST['search']);
+    $searchQ = "SELECT * FROM ticket WHERE customer like '$search'";
+    $searchResult = mysqli_query($db, $searchQ);
+
+    while($rowSearch = mysqli_fetch_array($searchResult)){
+        echo $rowSearch['customer'];
+    }
+}
+
+/* Get session info */
 $email = $_SESSION['email'];
 $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
 $result = mysqli_query($db, $user_email);
@@ -43,7 +58,6 @@ $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 
 
 //User information
-
 $problem = '';
 $description = '';
 if($userRole == 1){
