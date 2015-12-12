@@ -26,6 +26,7 @@ $role = $row['role'];
 $id = $row['id'];
 
 if(!empty($_SESSION['email'])){
+    echo '<div class="menubar">';
     echo "<h2>"."Welkom ". $userName."</h2>";
     if($role == 2){
         echo '<a href="user.php">Gebruikers bekijken </a> ' . "<br/>";
@@ -33,9 +34,11 @@ if(!empty($_SESSION['email'])){
         echo '<a href="user.php">Gegevens bewerken </a> ' . "<br/>";
     }
     echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
+    echo '</div>';
 }else{
     header('location: ../index.php');
 }
+
 /* Get session info */
 $email = $_SESSION['email'];
 $user_email = "SELECT * FROM user WHERE email LIKE '%$email%'";
@@ -81,7 +84,7 @@ if($userRole == 1){
         <form action="" method="post" role="form">
         <div class="form-group">
             <label for="description">Probleem beschrijving: </label> <br />
-            <input type="text" class="form-control" name="description" id="description" value="'.$description.'"> </input> <br />
+            <textarea class="form-control" name="description" id="description"> '.$description.'</textarea>
             <div class="dropdown">
             <label>Hoe dringend is het?</label>
             <select name="level">

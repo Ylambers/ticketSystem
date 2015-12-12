@@ -28,8 +28,10 @@ $role = $row['role'];
 
 
 if(!empty($_SESSION['email'])){
+    echo '<div class="menubar">';
     echo "<h2>"."Hallo ". $userName."</h2>";
-    echo '<a href="ticket.php"> Alle tickets </a>' . "<br/>";
+    echo '<a class="menu" href="ticket.php"> Alle tickets </a>';
+    echo '</div>';
 }else{
     header('location: ../index.php');
 }

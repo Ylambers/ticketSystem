@@ -30,9 +30,12 @@ if ($role == 2){
 }
 
 if(!empty($_SESSION['email'])){
-    echo "<h2>"."Welkom terug ". $userName."</h2>";
-    echo '<a href="ticket.php">Terug </a> ' . "<br/>";
-    echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
+    echo '<div class="menubar"> ';
+    echo "<h2>"."Welkom ". $userName."</h2>";
+      echo '<a href="ticket.php">Home </a> ';
+      echo '<a href="ticket.php">Terug </a> ';
+      echo '<a href="logout.php">Uitloggen </a>';
+    echo '</div>';
 }else{
     header('location: ../index.php');
 }

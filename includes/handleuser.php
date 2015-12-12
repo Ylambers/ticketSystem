@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <body>
+<div class="menubar">
 <a href="user.php">Terug</a>
+</div>
 <?php
 /**
  * Created by PhpStorm.
@@ -65,40 +67,42 @@ if($role == 2){
     $roleUser = $rowUser['role'];
     // Formulier user eddit
     echo '
-<form action="" method="POST" role="form">
-  <div class="form-group">
-    <label>Voornaam</label>
-    <input type="text" name="firstname" class="form-control" value="'.$rowUser['firstname'].'"> </input>
-    <label>Achternaam</label>
-    <input type="text" name="lastname" class="form-control" value="'.$rowUser['lastname'].'"> </input>
-    <label>Telefoonnummer</label>
-    <input type="text" name="phone" class="form-control" value="'.$rowUser['phone'].'"> </input>
-    <label>Email</label>
-    <input type="text" name="email" class="form-control" value="'.$rowUser['email'].'"> </input>
-';
-    if($roleUser == 1){
+<div class="containerForm">
+    <form action="" method="POST" role="form">
+      <div class="form-group">
+        <label>Voornaam</label>
+        <input type="text" name="firstname" class="form-control" value="'.$rowUser['firstname'].'"> </input>
+        <label>Achternaam</label>
+        <input type="text" name="lastname" class="form-control" value="'.$rowUser['lastname'].'"> </input>
+        <label>Telefoonnummer</label>
+        <input type="text" name="phone" class="form-control" value="'.$rowUser['phone'].'"> </input>
+        <label>Email</label>
+        <input type="text" name="email" class="form-control" value="'.$rowUser['email'].'"> </input>
+    ';
+        if($roleUser == 1){
+            echo'
+                <div class="checkbox">
+                    <label><input type="radio" class="form-control" name="level" value="2"> Admin </input></label>
+                </div>
+                ';
+        }elseif($roleUser == 2){
+            echo '
+                <div class="checkbox">
+                    <label><input type="radio" class="form-control" name="level" value="1"> Gebruiker </input></label>
+                </div>
+                ';
+        }else{
+            echo '
+                <div class="checkbox">
+                    <label><input type="radio" class="form-control" name="level" value="1"> Gebruiker </input></label>
+                </div>
+                ';
+        }
         echo'
-            <div class="checkbox">
-                <label><input type="radio" class="form-control" name="level" value="2"> Admin </input></label>
-            </div>
-            ';
-    }elseif($roleUser == 2){
-        echo '
-            <div class="checkbox">
-                <label><input type="radio" class="form-control" name="level" value="1"> Gebruiker </input></label>
-            </div>
-            ';
-    }else{
-        echo '
-            <div class="checkbox">
-                <label><input type="radio" class="form-control" name="level" value="1"> Gebruiker </input></label>
-            </div>
-            ';
-    }
-    echo'
-    <input type="submit" class="btn btn-default" name="updateUser" value="update gebruiker" />
-    </div>
-</form>
+        <input type="submit" class="btn btn-default" name="updateUser" value="update gebruiker" />
+        </div>
+    </form>
+</div>
 ';
 
 }
