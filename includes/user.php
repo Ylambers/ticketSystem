@@ -41,9 +41,48 @@ if(!empty($_SESSION['email'])){
 }
 
 if ($role == 2){
+    /* Search function */
+    echo '
+    <div class="containerForm">
+        <div class="form-group">
+            <form action="" method="post">
+                <input type="text" name="input" class="form-control" placeholder="Zoeken" />
+                <input type="submit" class="btn btn-default" value="zoeken" name="search"/>
+             </form> <br/>
+         </div>
+     </div>
+';
+    if(isset($_POST['search'])){
+        $search = mysqli_real_escape_string($db,$_POST['input']);
+        $searchQ = "SELECT * FROM user WHERE lastname LIKE '$search' OR firstname LIKE '$search' OR email like '$search' ";
+        $searchResult = mysqli_query($db, $searchQ);
+
+        echo '
+         <table class="table table-hover">
+         <tr>
+            <th>Voornaam</th>
+            <th>Achternaam</th>
+            <th>Email</th>
+            <th>telefoon</th>
+            <th>Rechten</th>
+            <th>Aanpassen</th>
+         <tr>
+        ';
+        while($rowSearch = mysqli_fetch_array($searchResult)){
+            echo '<tr>';
+            echo '<th>'.$rowSearch['firstname'] ."</th>";
+            echo '<th>'.$rowSearch['lastname'] ."</th>";
+            echo '<th>'.$rowSearch['email']. "</th>";
+            echo '<th>'.$rowSearch['phone'] ."</th>";
+            echo '<th>'.$roleName."</th>";
+            echo '<th>'.'<a href="handleuser.php?id='.$rowSearch['id'].'"> Aanpassen </a> </th>';
+            echo '</tr>';
+        }
+    }
+
+
     $queryUser = "SELECT * FROM user";
     $resultUser = mysqli_query($db, $queryUser);
-
     echo '
      <table class="table table-hover">
     <tr>

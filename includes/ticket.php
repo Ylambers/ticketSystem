@@ -145,23 +145,6 @@ if($userRole == 1){
 }
 
 if($userRole == 2){
-    /* Search function */
-    echo '
-    <form action="" method="post">
-        <input type="text" name="search" placeholder="Zoek op naam" />
-        <input type="submit" value="zoeken" name="search"/>
-     </form> <br/>
-';
-    if(isset($_POST['search'])){
-        $search = mysqli_real_escape_string($db, $_POST['search']);
-        $searchQ = "SELECT * FROM ticket WHERE customer like '$search'";
-        $searchResult = mysqli_query($db, $searchQ);
-
-        while($rowSearch = mysqli_fetch_array($searchResult)){
-            echo $rowSearch['customer'];
-        }
-    }
-
     $queryTicket = "SELECT * FROM ticket  ORDER BY created_at ";
     $resultTicket = mysqli_query($db, $queryTicket);
 

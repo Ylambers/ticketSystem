@@ -14,6 +14,7 @@ body{
     height: 80px;
     color: #000;
     background: #333;
+    margin-bottom: 10px;
 }
 .menubar h2{
     font-size: 20px;
