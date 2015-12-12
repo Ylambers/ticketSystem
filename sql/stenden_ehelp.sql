@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.12
+-- version 4.5.0.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Gegenereerd op: 11 dec 2015 om 19:35
--- Serverversie: 5.6.25
--- PHP-versie: 5.6.11
+-- Host: 127.0.0.1
+-- Gegenereerd op: 12 dec 2015 om 12:21
+-- Serverversie: 10.0.17-MariaDB
+-- PHP-versie: 5.6.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,11 +26,11 @@ SET time_zone = "+00:00";
 -- Tabelstructuur voor tabel `status`
 --
 
-CREATE TABLE IF NOT EXISTS `status` (
+CREATE TABLE `status` (
   `idstatus` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `active` int(2) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `status`
@@ -47,51 +47,51 @@ INSERT INTO `status` (`idstatus`, `name`, `active`) VALUES
 -- Tabelstructuur voor tabel `ticket`
 --
 
-CREATE TABLE IF NOT EXISTS `ticket` (
+CREATE TABLE `ticket` (
   `idticket` int(11) NOT NULL,
   `customer` varchar(45) NOT NULL,
   `idcustomer` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `urgentieLevel` int(3) NOT NULL,
   `description` varchar(45) NOT NULL,
-  `status` int(2) NOT NULL DEFAULT '1',
   `employee` varchar(45) NOT NULL,
-  `fixed_at` timestamp NULL DEFAULT NULL,
+  `fixed_at` varchar(14) DEFAULT NULL,
   `solution` longtext,
   `active` int(2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `ticket`
 --
 
-INSERT INTO `ticket` (`idticket`, `customer`, `idcustomer`, `created_at`, `urgentieLevel`, `description`, `status`, `employee`, `fixed_at`, `solution`, `active`) VALUES
-(20, 'y.lambers@outlook.com', 2, '2015-12-11 13:31:20', 0, 'hallofhhhhh', 1, '', NULL, NULL, 0),
-(21, 'y.lambers@outlook.com', 2, '2015-12-11 14:15:25', 0, 'dfsdfsdfsdfasdfadfasdfadfasdf', 0, 'yaron lambers', NULL, 'hallohjhbhhkjkjhj', 3),
-(22, 'y.lambers@outlook.com', 2, '2015-12-11 09:37:54', 0, 'dfsdfsdfsdfasdfadfasdfadfasdf', 0, '', NULL, NULL, 0),
-(23, 'y.lambers@outlook.com', 2, '2015-12-11 09:38:04', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 0, '', NULL, NULL, 0),
-(24, 'y.lambers@outlook.com', 2, '2015-12-11 10:19:43', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 1, '', NULL, NULL, 0),
-(25, 'y.lambers@outlook.com', 2, '2015-12-11 09:47:27', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 0, '', NULL, NULL, 0),
-(26, 'y.lambers@outlook.com', 2, '2015-12-11 09:47:38', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 0, '', NULL, NULL, 0),
-(27, 'y.lambers@outlook.com', 2, '2015-12-11 09:48:25', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 0, '', NULL, NULL, 0),
-(28, 'y.lambers@outlook.com', 2, '2015-12-11 10:28:56', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 1, '', NULL, NULL, 0);
+INSERT INTO `ticket` (`idticket`, `customer`, `idcustomer`, `created_at`, `urgentieLevel`, `description`, `employee`, `fixed_at`, `solution`, `active`) VALUES
+(20, 'y.lambers@outlook.com', 2, '2015-12-11 13:31:20', 0, 'hallofhhhhh', '', NULL, NULL, 0),
+(21, 'y.lambers@outlook.com', 2, '2015-12-11 14:15:25', 0, 'dfsdfsdfsdfasdfadfasdfadfasdf', 'yaron lambers', NULL, 'hallohjhbhhkjkjhj', 3),
+(22, 'y.lambers@outlook.com', 2, '2015-12-11 19:26:40', 0, 'dfsdfsdfsdfasdfadfasdfadfasdf', 'yaron lambers', '11.12.15', 'fg', 0),
+(23, 'y.lambers@outlook.com', 2, '2015-12-11 18:58:31', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 'yaron lambers', '11.12.15', 'De computer is geinstalleeerd en wij zijn heel trots', 0),
+(24, 'y.lambers@outlook.com', 2, '2015-12-11 10:19:43', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
+(25, 'y.lambers@outlook.com', 2, '2015-12-11 09:47:27', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
+(26, 'y.lambers@outlook.com', 2, '2015-12-11 09:47:38', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
+(27, 'y.lambers@outlook.com', 2, '2015-12-11 19:16:48', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', 'yaron lambers', '11.12.15', 'fgdfgdfgdfg', 0),
+(28, 'y.lambers@outlook.com', 2, '2015-12-11 10:28:56', 1, 'jmhjkjhgkjhkjhkjhkjhkjhkjhkjhkhjkjhjkkjh', '', NULL, NULL, 0),
+(29, 'y.lambers@outlook.com', 2, '2015-12-11 22:12:42', 1, 'sdfdsfsdfdfsdfsdfsdfsfdsdfsdf', '', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `urgentieLevel`
+-- Tabelstructuur voor tabel `urgentielevel`
 --
 
-CREATE TABLE IF NOT EXISTS `urgentieLevel` (
+CREATE TABLE `urgentielevel` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `urgentieLevel`
+-- Gegevens worden geëxporteerd voor tabel `urgentielevel`
 --
 
-INSERT INTO `urgentieLevel` (`id`, `name`) VALUES
+INSERT INTO `urgentielevel` (`id`, `name`) VALUES
 (1, 'Low'),
 (2, 'Normal'),
 (4, 'Critical');
@@ -102,7 +102,7 @@ INSERT INTO `urgentieLevel` (`id`, `name`) VALUES
 -- Tabelstructuur voor tabel `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(5) NOT NULL,
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
@@ -111,14 +111,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` int(2) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `user`
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `phone`, `image`, `role`, `email`, `password`) VALUES
-(2, 'yaron', 'lambers', 620923399, '', 2, 'y.lambers@outlook.com', 'admin2');
+(2, 'yaron', 'lambers', 620923399, '', 2, 'y.lambers@outlook.com', 'admin2'),
+(3, 'Menno', 'godeke', 1234567890, '', 2, 'y.lambers@outlook.com', 'admin2');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -137,9 +138,9 @@ ALTER TABLE `ticket`
   ADD PRIMARY KEY (`idticket`);
 
 --
--- Indexen voor tabel `urgentieLevel`
+-- Indexen voor tabel `urgentielevel`
 --
-ALTER TABLE `urgentieLevel`
+ALTER TABLE `urgentielevel`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -156,22 +157,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT voor een tabel `status`
 --
 ALTER TABLE `status`
-  MODIFY `idstatus` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `idstatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT voor een tabel `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
--- AUTO_INCREMENT voor een tabel `urgentieLevel`
+-- AUTO_INCREMENT voor een tabel `urgentielevel`
 --
-ALTER TABLE `urgentieLevel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+ALTER TABLE `urgentielevel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
