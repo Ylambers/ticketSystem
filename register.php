@@ -16,10 +16,12 @@
  * Time: 20:42
  */
 
+$count = 0;
+
 include_once('includes/database.php');
 
 if (isset($_POST['register'])) {
-
+    $count++;
     $firstname = mysqli_real_escape_string($db, $_POST['firstname']);
     $lastname = mysqli_real_escape_string($db, $_POST['lastname']);
     $phone = mysqli_real_escape_string($db, $_POST['phone']);
@@ -27,11 +29,17 @@ if (isset($_POST['register'])) {
     $password = mysqli_real_escape_string($db, $_POST['password']);
     $password1 = mysqli_real_escape_string($db, $_POST['password1']);
 
+    $queryUsers = "SELECT * FROM user WHERE email='$email'";
+    $resultUsers = mysqli_query($db, $queryUsers);
+    $rowUsers = mysqli_fetch_array($resultUsers);
+    $userEmail = $rowUsers['email'];
+
     $error = 0;
     if(strlen($firstname) < 3){$error++; echo' De Voornaam is te kort!'."<br/>" ;}
     if(strlen($lastname) < 3){$error++; echo' De achternaam is te kort!'."<br/>";}
     if(strlen($phone) < 3){$error++; echo' Het telefoonnummer is te kort!'."<br/>";}
     if(strlen($email) < 3){$error++; echo' Het emailadres is te kort!'."<br/>";}
+    if(count($userEmail) > 0){$error++; echo 'Dit email adres bestaat al!' ."<br/>";}
     if($password != $password1){$error++; echo'De wachtwoorden zijn niet gelijk!'."<br/>";}
 
     if($password == $password1){
@@ -40,15 +48,12 @@ if (isset($_POST['register'])) {
     }
 
     if ($error == 0){
-        $query = "INSERT INTO user (id, firstname, lastname, phone, image, email, password) VALUES (NULL,'$firstname', '$lastname', '$phone', '$email', '$password' ,'$password1')";
+        $query = "INSERT INTO user (firstname, lastname, phone, image, email, password) VALUES ('$firstname', '$lastname', '$phone', '$email', '$password' ,'$password1')";
         if (!mysqli_query($db, $query)) {
             die('Error ' . mysqli_error($db));
         }else{
             echo 'U bent nu geregisteert';
-            $firstname = '';
-            $lastname = '';
-            $phone = '';
-            $email = '';
+            $count = 0;
         }
     }
     if(strlen($error) > 1){
@@ -56,10 +61,12 @@ if (isset($_POST['register'])) {
     }
 }
 
-$firstname = '';
-$lastname = '';
-$phone = '';
-$email = '';
+if($count == 0){
+    $firstname = '';
+    $lastname = '';
+    $phone = '';
+    $email = '';
+}
 
 echo '
    <form role="form" method="post">
@@ -74,7 +81,7 @@ echo '
         <input type="text" class="form-control" id="phone" name="phone" value="'.$phone.'">
 
         <label for="email">Email:</label>
-        <input type="text" class="form-control" id="email" name="email" value="'.$email.'">
+        <input type="email" class="form-control" id="email" name="email" value="'.$email.'">
 
         <label for="password">Wachtwoord:</label>
         <input type="password" class="form-control" id="password" name="password">
