@@ -1,3 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+<a href="user.php">Terug</a>
 <?php
 /**
  * Created by PhpStorm.
@@ -23,7 +33,7 @@ if(isset($_POST['updateUser'])){
     $email = mysqli_real_escape_string($db, $_POST['email']);
     if(isset($_POST['level'])){
         $level = mysqli_real_escape_string($db, $_POST['level']);
-    }else{
+    }else{ // wordt gebruikt wanneer account niet wordt aangepast
         $queryUser = "SELECT * FROM user WHERE id LIKE '%$id%'";
         $resultUser = mysqli_query($db, $queryUser);
         $rowUser = mysqli_fetch_array($resultUser);
@@ -54,29 +64,41 @@ $queryUser = "SELECT * FROM user WHERE id LIKE '%$id%'";
 $resultUser = mysqli_query($db, $queryUser);
 $rowUser = mysqli_fetch_array($resultUser);
 $roleUser = $rowUser['role'];
-
+ // Formulier user eddit
 echo '
-<form action="" method="POST" >
+<form action="" method="POST" role="form">
+  <div class="form-group">
     <label>Voornaam</label>
-    <input type="text" name="firstname" value="'.$rowUser['firstname'].'"> </input>
+    <input type="text" name="firstname" class="form-control" value="'.$rowUser['firstname'].'"> </input>
     <label>Achternaam</label>
-    <input type="text" name="lastname" value="'.$rowUser['lastname'].'"> </input>
+    <input type="text" name="lastname" class="form-control" value="'.$rowUser['lastname'].'"> </input>
     <label>Telefoonnummer</label>
-    <input type="text" name="phone" value="'.$rowUser['phone'].'"> </input>
+    <input type="text" name="phone" class="form-control" value="'.$rowUser['phone'].'"> </input>
     <label>Email</label>
-    <input type="text" name="email" value="'.$rowUser['email'].'"> </input>
+    <input type="text" name="email" class="form-control" value="'.$rowUser['email'].'"> </input>
 ';
     if($roleUser == 1){
-        echo'<input type="radio" name="level" value="2"> Admin </input>';
+        echo'
+            <div class="checkbox">
+                <label><input type="radio" class="form-control" name="level" value="2"> Admin </input></label>
+            </div>
+            ';
     }elseif($roleUser == 2){
-        echo '<input type="radio" name="level" value="1"> Gebruiker </input>';
+        echo '
+            <div class="checkbox">
+                <label><input type="radio" class="form-control" name="level" value="1"> Gebruiker </input></label>
+            </div>
+            ';
     }else{
-        echo '<input type="radio" name="level" value="1"> Gebruiker </input>';
+        echo '
+            <div class="checkbox">
+                <label><input type="radio" class="form-control" name="level" value="1"> Gebruiker </input></label>
+            </div>
+            ';
     }
 echo'
-
-
-    <input type="submit" name="updateUser" value="update gebruiker" />
+    <input type="submit" class="btn btn-default" name="updateUser" value="update gebruiker" />
+    </div>
 </form>
 ';
 
