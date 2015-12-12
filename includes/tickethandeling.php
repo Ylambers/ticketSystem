@@ -28,7 +28,7 @@ $role = $row['role'];
 
 
 if(!empty($_SESSION['email'])){
-    echo "Welkom terug ". $userName;
+    echo "<h2>"."Hallo ". $userName."</h2>";
     echo '<a href="ticket.php"> Alle tickets </a>' . "<br/>";
 }else{
     header('location: ../index.php');
@@ -59,7 +59,8 @@ if ($role == 2){
         //String date timestamp
         $date = date("d.m.y");
         $sqlDate = date('d.m.y', strtotime($date));
-        if(strlen($ticketSolution <= 20)){$error++; echo "Graag een betere beschrijving ingeven! Minmaal 20 tekens" . "<br/>";}
+
+        if(strlen($ticketSolution) < 10){$error++; echo "Graag een oplossing in voeren! Minimaal 10 tekens". "<br/>";}
         if(empty($ticketStatus)){$error++; echo "Graag een ticketstatus invoeren!". "<br/>";}
 
         $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName', fixed_at='$sqlDate'  WHERE idticket='$id'  ";
@@ -78,40 +79,41 @@ if ($role == 2){
      <tr>
         <th>Ticket aangemaakt op </th>
         <th>Maker ticked</th>
-        <th>Prioriteid</th>
+        <th>Prioriteit</th>
         <th>Beschrijving </th>
         <th>Oplossing </th>
         <th>Tijdgefixt </th>
+        <th>Behandelaar</th>
     </tr>
     ';
     echo '<tr>';
-    echo "<th>".$row['created_at']."<th/>";
-    echo "<th>".$row['customer']. "<th/>";
-    echo "<th>".$nameUrgentieLevel. "<th/>";
-    echo "<th>".$row['description'] . "<th/>";
-    echo "<th>" .$row['solution'] . "<th/>";
-    echo "<th>" .$row['fixed_at'] . "<th/>";
+    echo "<th>".$row['created_at']."</th>";
+    echo "<th>".$row['customer']. "</th>";
+    echo "<th>".$nameUrgentieLevel. "</th>";
+    echo "<th>".$row['description'] . "</th>";
+    echo "<th>" .$row['solution'] . "</th>";
+    echo "<th>" .$row['fixed_at'] . "</th>";
+    echo "<th>" .$row['employee'] . "</th>";
+
     echo '</tr>';
     echo '
-        <form action="" method="POST">
+        <form method="POST">
+         <label>Oplossing</label> <br/>
+         <textarea name="solution" rows="" cols="100">  </textarea> <br/>
         <label> Ticket status </label>
         <select name="status" />
-        <option> </option>
+        <option>  </option>
         ';
-
     echo '</tr>';
     while ($rowStatus = mysqli_fetch_array($returnStatus)){
         echo '
             <option value="'.$rowStatus['active'].'">'.$rowStatus['name'].' </option>
         ';
     }
-
-
     echo'
             </select>
-            <label>Oplossing:</label>
-            <input type="textarea" name="solution" value="'.$ticketSolution.'" />
-            <input type="submit" name="submit" value="Verzenden">
+
+            <input type="submit" name="submit" value="Verzenden"> <br/>
         </form>
     ';
 

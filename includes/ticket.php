@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1> Tickets </h1>
+
 
 <?php
 /**
@@ -27,7 +27,7 @@ $row = mysqli_fetch_assoc($result);
 $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 
 if(!empty($_SESSION['email'])){
-    echo "Welkom terug ". $userName;
+    echo "<h2>"."Welkom terug ". $userName."</h2>";
     echo '<a href="logout.php">Uitloggen </a> ' . "<br/>";
 }else{
     header('location: ../index.php');
