@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>table</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
 
 </head>
 <body>
@@ -26,7 +26,7 @@ $role = $row['role'];
 $id = $row['id'];
 
 if(!empty($_SESSION['email'])){
-    echo "<h2>"."Welkom terug ". $userName."</h2>";
+    echo "<h2>"."Welkom ". $userName."</h2>";
     if($role == 2){
         echo '<a href="user.php">Gebruikers bekijken </a> ' . "<br/>";
     }else{
@@ -106,6 +106,7 @@ if($userRole == 1){
     echo '
     <table class="table table-hover">
     <tr>
+        <th>Status</th>
         <th>Datum</th>
         <th>Aangemaakt op</th>
         <th>Beschrijving probleem</th>
@@ -115,7 +116,15 @@ if($userRole == 1){
     <tr>
     ';
     while($rowAll = mysqli_fetch_array($queryAll)){
+        if($rowAll['active'] == 0){
+            $active = 'In de wachtrij';
+        }elseif($rowAll['active'] == 1){
+            $active = 'In behandeling';
+        }elseif($rowAll['active'] == 3){
+            $active = '<div class="done"> '.'Klaar'."</div>";
+        }
         echo '<tr>';
+        echo "<th>".$active ."</th>";
         echo "<th>".$rowAll['description'] ."</th>";
         echo "<th>".$rowAll['created_at'] ."</th>";
         echo "<th>".$rowAll['description'] ."</th>";
@@ -157,10 +166,12 @@ if($userRole == 2){
     $returnUrgentieLevel = mysqli_query($db, $urgentieLevelQuery);
     $rowUrgentieLevel = mysqli_fetch_array($returnUrgentieLevel);
     $nameUrgentieLevel = $rowUrgentieLevel['name'];
+
     echo '
     <table class="table table-hover">
     <tr>
         <th>Datum</th>
+        <th>Proces</th>
         <th>Prioriteit</th>
         <th>Customer Email</th>
         <th>Description</th>
@@ -168,13 +179,22 @@ if($userRole == 2){
     <tr>
     ';
     while($row = mysqli_fetch_array($resultTicket)){
+
+        if($row['active'] == 0){
+            $active = 'In de wachtrij';
+        }elseif($row['active'] == 1){
+            $active = 'In behandeling';
+        }elseif($row['active'] == 3){
+            $active = 'Klaar';
+        }
+
         echo '<tr>';
         echo "<th>".$row['created_at']. "</th>";
+        echo "<th>" .$active."</th>";
         echo "<th>".$rowUrgentieLevel['name']. "</th>";
         echo "<th>".$row['customer']. "</th>";
         echo "<th>".$row['description']. "<th/>";
         echo '<a href="tickethandeling.php?id='.$row['idticket'].'"> Behandelen </a> <br/>';
-
         echo '</tr>';
     }
     echo '</table>';
