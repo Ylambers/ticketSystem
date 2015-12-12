@@ -49,7 +49,6 @@ if ($role == 2){
     $returnUrgentieLevel = mysqli_query($db, $urgentieLevelQuery);
     $rowUrgentieLevel = mysqli_fetch_array($returnUrgentieLevel);
     $nameUrgentieLevel = $rowUrgentieLevel['name'];
-
     $statusQ = "SELECT * FROM status";
     $returnStatus = mysqli_query($db, $statusQ);
 
@@ -77,6 +76,14 @@ if ($role == 2){
         }
     }
 
+    if($row['urgentieLevel'] == 1){
+        $urgentieLevel = 'Laag';
+    }elseif($row['urgentieLevel'] == 2){
+        $urgentieLevel = 'Normaal';
+    }elseif($row['urgentieLevel'] == 4){
+        $urgentieLevel = 'Kritiek';
+    }
+
     echo '
     <table class="table table-hover">
      <tr>
@@ -92,7 +99,7 @@ if ($role == 2){
     echo '<tr>';
     echo "<th>".$row['created_at']."</th>";
     echo "<th>".$row['customer']. "</th>";
-    echo "<th>".$nameUrgentieLevel. "</th>";
+    echo "<th>".$urgentieLevel. "</th>";
     echo "<th>".$row['description'] . "</th>";
     echo "<th>" .$row['solution'] . "</th>";
     echo "<th>" .$row['fixed_at'] . "</th>";

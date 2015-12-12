@@ -174,10 +174,18 @@ if($userRole == 2){
             $active = 'Klaar';
         }
 
+        if($row['urgentieLevel'] == 1){
+            $urgentieLevel = 'Laag';
+        }elseif($row['urgentieLevel'] == 2){
+            $urgentieLevel = 'Normaal';
+        }elseif($row['urgentieLevel'] == 4){
+            $urgentieLevel = 'Kritiek';
+        }
+
         echo '<tr>';
         echo "<th>".$row['created_at']. "</th>";
         echo "<th>" .$active."</th>";
-        echo "<th>".$rowUrgentieLevel['name']. "</th>";
+        echo "<th>".$urgentieLevel. "</th>";
         echo "<th>".$row['customer']. "</th>";
         echo "<th>".$row['description']. "<th/>";
         echo '<a href="tickethandeling.php?id='.$row['idticket'].'"> Behandelen </a> <br/>';
