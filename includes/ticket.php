@@ -119,9 +119,15 @@ if($userRole == 1){
         echo "<th>".$rowAll['description'] ."</th>";
         echo "<th>".$rowAll['created_at'] ."</th>";
         echo "<th>".$rowAll['description'] ."</th>";
-        echo "<th>".$rowAll['employee'] ."</th>";
-        echo "<th>".$rowAll['fixed_at'] ."</th>";
-        echo "<th>".$rowAll['solution'] ."</th>";
+        if($rowAll['employee'] && $rowAll['fixed_at'] && $rowAll['solution'] == NULL){
+            echo "<th>".'Er is nog geen oplossing'."</th>";
+            echo "<th>".'-'."</th>";
+            echo "<th>".'-'."</th>";
+        }else{
+            echo "<th>".$rowAll['employee'] ."</th>";
+            echo "<th>".$rowAll['fixed_at'] ."</th>";
+            echo "<th>".$rowAll['solution'] ."</th>";
+        }
         echo '</tr>';
     }
 }
