@@ -60,6 +60,7 @@ if ($role == 2){
 
         echo '
          <table class="table table-hover">
+         <h2>Gevonden gebruikers</h2>
          <tr>
             <th>Voornaam</th>
             <th>Achternaam</th>
@@ -80,8 +81,6 @@ if ($role == 2){
             echo '</tr>';
         }
     }
-
-
     $queryUser = "SELECT * FROM user";
     $resultUser = mysqli_query($db, $queryUser);
     echo '
