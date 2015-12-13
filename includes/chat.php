@@ -89,7 +89,7 @@ $rowinfoUser = mysqli_fetch_array($msgResult);
         $userName = $rowUser['firstname']." ". $rowUser['lastname'];
 
         echo '<div class="time"> ';
-            echo $row['post_time']. " - " .$userName;
+            echo $row['post_time']. " - <h2> " .$userName . "</h2>";
         echo '</div>';
         echo '<div class="msg">';
             echo $row['message']."<br/>";
