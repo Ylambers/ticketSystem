@@ -24,6 +24,7 @@ $row = mysqli_fetch_assoc($result);
 $userName = $row['firstname'] ." ". $row['lastname']. "<br/>";
 $role = $row['role'];
 $id = $row['id'];
+
 if ($role == 2){
     $roleName = 'Admin';
 }elseif($role == 1){
@@ -70,6 +71,7 @@ if ($role == 2){
             <th>Aanpassen</th>
          <tr>
         ';
+
         while($rowSearch = mysqli_fetch_array($searchResult)){
             echo '<tr>';
             echo '<th>'.$rowSearch['firstname'] ."</th>";
@@ -81,6 +83,9 @@ if ($role == 2){
             echo '</tr>';
         }
     }
+
+    /* End search function*/
+
     $queryUser = "SELECT * FROM user";
     $resultUser = mysqli_query($db, $queryUser);
     echo '
@@ -143,20 +148,20 @@ if($role == 1){
     }
 
     echo '
-<div class="containerForm">
-    <form method="POST" role="form">
-        <div class="form-group">
-            <label>Voornaam</label>
-            <input type="text" name="firstname" class="form-control" value="'.$rowUser['firstname'].'"> </input>
-            <label>Achternaam</label>
-            <input type="text" name="lastname" class="form-control" value="'.$rowUser['lastname'].'"> </input>
-            <label>Telefoonnummer</label>
-            <input type="text" name="phone" class="form-control" value="'.$rowUser['phone'].'"> </input>
-            <label>Email</label>
-            <input type="text" name="email" class="form-control" value="'.$rowUser['email'].'"> </input>
-            <input type="submit" class="btn btn-default" name="updateUser" value="update gebruiker" />
-        </div>
-    </form>
+    <div class="containerForm">
+        <form method="POST" role="form">
+            <div class="form-group">
+                <label>Voornaam</label>
+                <input type="text" name="firstname" class="form-control" value="'.$rowUser['firstname'].'"> </input>
+                <label>Achternaam</label>
+                <input type="text" name="lastname" class="form-control" value="'.$rowUser['lastname'].'"> </input>
+                <label>Telefoonnummer</label>
+                <input type="text" name="phone" class="form-control" value="'.$rowUser['phone'].'"> </input>
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" value="'.$rowUser['email'].'"> </input>
+                <input type="submit" class="btn btn-default" name="updateUser" value="update gebruiker" />
+            </div>
+        </form>
     </div>
     ';
 }

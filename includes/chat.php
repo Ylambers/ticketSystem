@@ -65,7 +65,8 @@ if(isset($_POST['chat'])){
         if (!mysqli_query($db, $query)) {
             die('Error ' . mysqli_error($db));
         }else{
-            header("refresh:1;");
+            $message = '';
+            header("refresh:2;");
         }
     }
 }
