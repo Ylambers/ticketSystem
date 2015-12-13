@@ -135,7 +135,7 @@ if($userRole == 1){
         echo "<th>".$rowAll['employee'] ."</th>";
         echo "<th>".$rowAll['fixed_at'] ."</th>";
         echo "<th>".$rowAll['solution'] ."</th>";
-        echo "<th>".'<a href="chat.php?id='.$row['idticket'].'"> Chatten </a>'. "</th>";
+        echo "<th>".'<a href="chat.php?id='.$rowAll['idticket'].'"> Chatten </a>'. "</th>";
         }
         echo '</tr>';
 

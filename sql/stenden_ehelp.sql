@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 dec 2015 om 00:25
+-- Gegenereerd op: 13 dec 2015 om 16:44
 -- Serverversie: 10.0.17-MariaDB
 -- PHP-versie: 5.6.14
 
@@ -19,6 +19,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `stenden_ehelp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(11) NOT NULL,
+  `message` longtext NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  `post_time` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `chat`
+--
+
+INSERT INTO `chat` (`id`, `message`, `user_id`, `ticket_id`, `post_time`) VALUES
+(26, 'fgdgfd', 3, 3, '2015-12-13 16:32'),
+(27, 'fgdgfd', 4, 3, '2015-12-13 16:32'),
+(28, 'fgdgfd', 4, 3, '2015-12-13 16:33'),
+(29, 'fgdgfd', 4, 3, '2015-12-13 16:33'),
+(30, 'hmngvhmghmg', 3, 1, '2015-12-13 16:35'),
+(31, 'jkhjk', 4, 3, '2015-12-13 16:36'),
+(32, 'jkhjk', 4, 3, '2015-12-13 16:36'),
+(33, 'dfsdfsdf', 4, 3, '2015-12-13 16:43');
 
 -- --------------------------------------------------------
 
@@ -65,8 +93,9 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`idticket`, `customer`, `idcustomer`, `created_at`, `urgentieLevel`, `description`, `employee`, `fixed_at`, `solution`, `active`) VALUES
-(1, 'y.lambers@outlook.com', 3, '2015-12-12 23:24:00', 4, 'Hallo mijn fiets is stuk :(', 'yaron lambers<br/>', '13.12.15', '  Band is geplakt!', 3),
-(2, 'y.lambers@outlook.com', 3, '2015-12-12 22:28:46', 2, ' Hallo mijn fiets is stuk :(', NULL, NULL, NULL, 0);
+(1, 'y.lambers@outlook.com', 3, '2015-12-12 23:46:41', 4, 'Hallo mijn fiets is stuk :(', 'yaron lambers<br/>', '13.12.15', '  Fietsband is gemaakt meneer', 3),
+(2, 'y.lambers@outlook.com', 3, '2015-12-12 22:28:46', 2, ' Hallo mijn fiets is stuk :(', NULL, NULL, NULL, 0),
+(3, 'fietsje@hotmail.com', 4, '2015-12-12 23:33:04', 4, ' Damm fuck this is happening?', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -117,6 +146,12 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `phone`, `role`, `email`, `pa
 --
 
 --
+-- Indexen voor tabel `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `status`
 --
 ALTER TABLE `status`
@@ -145,6 +180,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT voor een tabel `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
 -- AUTO_INCREMENT voor een tabel `status`
 --
 ALTER TABLE `status`
@@ -153,7 +193,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT voor een tabel `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT voor een tabel `urgentielevel`
 --

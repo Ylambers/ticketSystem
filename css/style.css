@@ -10,9 +10,12 @@ body{
 }
 
 .chat{
+    top: 10px;
+    padding: 15px;
 }
 
-.chat .admin{
+.chat .time{
+    font-size: 18px;
     color: #ff0000;
 }
 

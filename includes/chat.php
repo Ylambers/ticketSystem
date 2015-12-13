@@ -71,37 +71,36 @@ echo '
         <input type="submit" class="form-control" name="chat" value="verzend" />
     ';
 
-$queryMSg = "SELECT * FROM chat WHERE user_id='$idCustomer' AND ticket_id='$chatId' ORDER BY post_time DESC";
+$queryMSg = "SELECT * FROM chat WHERE  ticket_id='$chatId' ORDER BY post_time DESC LIMIT 15";
 $msgResult = mysqli_query($db, $queryMSg);
+$rowinfoUser = mysqli_fetch_array($msgResult);
+$idUser = $rowinfoUser['user_id'];
 
-if($role == 2) {
+
+
+$chatUserId = "SELECT * FROM user WHERE id='$idUser'";
+$chatUserIdResult = mysqli_query($db, $chatUserId);
+$rowChatUserIdResult = mysqli_fetch_array($chatUserIdResult);
+$nameUser = $rowChatUserIdResult['firstname'];
+
+
     echo '
         <div class="chat">
     ';
     echo "Je praat met " . $rowUser['firstname'] . " " . $rowUser['lastname'] . "<br/>";
     while ($row = mysqli_fetch_array($msgResult)) {
-        echo '<div class="admin"> ';
-        echo $row['post_time'] . " - " . $row['message'] . "<br/>";
+        echo '<div class="time"> ';
+        echo $row['post_time']. ".<br/>";
+        echo $nameUser;
         echo '</div>';
-    }
-    echo '
-        </div>
-    ';
-}
+        echo $row['message']."<br/>";
 
-if($role == 1){
-    echo '
-        <div class="chat">
-    ';
-    echo "Je praat met " . $rowUser['firstname'] . " " . $rowUser['lastname'] . "<br/>";
-    while ($row = mysqli_fetch_array($msgResult)) {
-        echo '<div class="user"> ';
-        echo $row['post_time'] . " - " . $row['message'] . "<br/>";
-        echo '</div>';
+
     }
     echo '
+
         </div>
     ';
-}
+
 
 
