@@ -2,11 +2,22 @@ body{
     margin: 0;
     padding: 0;
 }
-.containerForm{
+.containerForm , .chat{
     width: 80%;
     height: auto;
     margin: 0 auto;
     background: #fff;
+}
+
+.chat{
+}
+
+.chat .admin{
+    color: #ff0000;
+}
+
+.chat .user{
+    color: #333;
 }
 
 .menubar{
@@ -39,7 +50,6 @@ body{
 .done{
     color: #ff0000;
 }
-
 
 
 @media only screen

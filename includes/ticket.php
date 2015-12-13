@@ -116,6 +116,7 @@ if($userRole == 1){
         <th>Behandelaar</th>
         <th>Datum oplossing</th>
         <th>Beschrijving oplossing</th>
+        <th>Chatten</th>
     <tr>
     ';
     while($rowAll = mysqli_fetch_array($queryAll)){
@@ -131,17 +132,13 @@ if($userRole == 1){
         echo "<th>".$rowAll['description'] ."</th>";
         echo "<th>".$rowAll['created_at'] ."</th>";
         echo "<th>".$rowAll['description'] ."</th>";
-        if($rowAll['employee'] && $rowAll['fixed_at'] && $rowAll['solution'] == NULL){
-            echo "<th>".'Er is nog geen oplossing'."</th>";
-            echo "<th>".'-'."</th>";
-            echo "<th>".'-'."</th>";
-        }else{
-            echo "<th>".$rowAll['employee'] ."</th>";
-            echo "<th>".$rowAll['fixed_at'] ."</th>";
-            echo "<th>".$rowAll['solution'] ."</th>";
+        echo "<th>".$rowAll['employee'] ."</th>";
+        echo "<th>".$rowAll['fixed_at'] ."</th>";
+        echo "<th>".$rowAll['solution'] ."</th>";
+        echo "<th>".'<a href="chat.php?id='.$row['idticket'].'"> Chatten </a>'. "</th>";
         }
         echo '</tr>';
-    }
+
 }
 
 if($userRole == 2){
@@ -161,7 +158,7 @@ if($userRole == 2){
         <th>Prioriteit</th>
         <th>Customer Email</th>
         <th>Description</th>
-        <th>Behandelen</th>
+        <th>Behandelen / Chatten</th>
     <tr>
     ';
     while($row = mysqli_fetch_array($resultTicket)){
@@ -188,7 +185,7 @@ if($userRole == 2){
         echo "<th>".$urgentieLevel. "</th>";
         echo "<th>".$row['customer']. "</th>";
         echo "<th>".$row['description']. "<th/>";
-        echo '<a href="tickethandeling.php?id='.$row['idticket'].'"> Behandelen </a> <br/>';
+        echo '<a href="tickethandeling.php?id='.$row['idticket'].'"> Behandelen </a> -  <a href="chat.php?id='.$row['idticket'].'"> Chatten </a>';
         echo '</tr>';
     }
     echo '</table>';
