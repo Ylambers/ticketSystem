@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 dec 2015 om 16:44
+-- Gegenereerd op: 13 dec 2015 om 19:28
 -- Serverversie: 10.0.17-MariaDB
 -- PHP-versie: 5.6.14
 
@@ -39,14 +39,42 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`id`, `message`, `user_id`, `ticket_id`, `post_time`) VALUES
-(26, 'fgdgfd', 3, 3, '2015-12-13 16:32'),
-(27, 'fgdgfd', 4, 3, '2015-12-13 16:32'),
-(28, 'fgdgfd', 4, 3, '2015-12-13 16:33'),
-(29, 'fgdgfd', 4, 3, '2015-12-13 16:33'),
-(30, 'hmngvhmghmg', 3, 1, '2015-12-13 16:35'),
-(31, 'jkhjk', 4, 3, '2015-12-13 16:36'),
-(32, 'jkhjk', 4, 3, '2015-12-13 16:36'),
-(33, 'dfsdfsdf', 4, 3, '2015-12-13 16:43');
+(50, 'Hallo?', 3, 3, '2015-12-13 18:19'),
+(51, 'Hallo meneer Lenonardo, ik had begrepen dat je een probleem hebt met de fiets?', 3, 3, '2015-12-13 18:19'),
+(52, 'Hallo meneer Lenonardo, ik had begrepen dat je een probleem hebt met de fiets?', 3, 3, '2015-12-13 18:20'),
+(53, 'Hallo meneer Lenonardo, ik had begrepen dat je een probleem hebt met de fiets?', 3, 3, '2015-12-13 18:20:55'),
+(54, 'Hallo meneer Lenonardo, ik had begrepen dat je een probleem hebt met de fiets??', 3, 3, '2015-12-13 18:21:05'),
+(55, 'Ja dat klopt', 4, 3, '2015-12-13 18:21:22'),
+(56, 'Ja dat klopt', 4, 3, '2015-12-13 18:21:26'),
+(57, 'Ja dat klopt', 4, 3, '2015-12-13 18:23:11'),
+(58, '', 4, 3, '2015-12-13 18:24:13'),
+(59, '', 4, 3, '2015-12-13 18:24:16'),
+(60, '', 4, 3, '2015-12-13 18:24:24'),
+(61, '', 4, 3, '2015-12-13 18:24:51'),
+(62, '', 4, 3, '2015-12-13 18:24:59'),
+(63, '', 4, 3, '2015-12-13 18:25:07'),
+(64, 'Hallo?', 4, 4, '2015-12-13 18:31:37'),
+(65, 'Hallo?', 4, 4, '2015-12-13 18:31:39'),
+(66, 'Hallo?', 4, 4, '2015-12-13 18:32:33'),
+(67, '', 4, 4, '2015-12-13 18:32:35'),
+(68, '', 4, 4, '2015-12-13 18:32:36'),
+(69, 'Hallo 1234567890123456789', 4, 4, '2015-12-13 18:34:18'),
+(70, 'Hallo 1234567890123456789', 4, 4, '2015-12-13 18:34:21'),
+(71, 'Hallo 1234567890123456789', 4, 4, '2015-12-13 18:34:31'),
+(72, 'aaaaaaaaaaaaaaaaaaaaaaaaa', 5, 9, '2015-12-13 19:02:09'),
+(73, 'Hallo meneer alwin, hoe gaat het ermee?', 3, 9, '2015-12-13 19:02:27'),
+(74, 'Hallo meneer alwin, hoe gaat het ermee?', 3, 9, '2015-12-13 19:02:32'),
+(75, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 5, 9, '2015-12-13 19:03:05'),
+(76, 'volgensmij glicthed et er allemaal uit...', 5, 9, '2015-12-13 19:03:18'),
+(77, '* Minimaal 20 tekens per bericht', 3, 1, '2015-12-13 19:25:36'),
+(78, '* Minimaal 20 tekens per bericht', 3, 1, '2015-12-13 19:25:39'),
+(79, '* Minimaal 20 tekens per bericht', 3, 1, '2015-12-13 19:25:48'),
+(80, '* Minimaal 20 tekens per bericht', 3, 8, '2015-12-13 19:25:54'),
+(81, '* Minimaal 20 tekens per bericht', 3, 8, '2015-12-13 19:25:59'),
+(82, '* Minimaal 20 tekens per bericht', 3, 8, '2015-12-13 19:26:15'),
+(83, '* Minimaal 20 tekens per bericht', 3, 8, '2015-12-13 19:26:28'),
+(84, '* Minimaal 20 tekens per bericht', 3, 8, '2015-12-13 19:26:33'),
+(85, '* Minimaal 20 tekens per bericht', 3, 8, '2015-12-13 19:26:35');
 
 -- --------------------------------------------------------
 
@@ -94,8 +122,15 @@ CREATE TABLE `ticket` (
 
 INSERT INTO `ticket` (`idticket`, `customer`, `idcustomer`, `created_at`, `urgentieLevel`, `description`, `employee`, `fixed_at`, `solution`, `active`) VALUES
 (1, 'y.lambers@outlook.com', 3, '2015-12-12 23:46:41', 4, 'Hallo mijn fiets is stuk :(', 'yaron lambers<br/>', '13.12.15', '  Fietsband is gemaakt meneer', 3),
-(2, 'y.lambers@outlook.com', 3, '2015-12-12 22:28:46', 2, ' Hallo mijn fiets is stuk :(', NULL, NULL, NULL, 0),
-(3, 'fietsje@hotmail.com', 4, '2015-12-12 23:33:04', 4, ' Damm fuck this is happening?', NULL, NULL, NULL, 0);
+(2, 'y.lambers@outlook.com', 3, '2015-12-13 18:10:32', 2, ' Hallo mijn fiets is stuk :(', 'Yaron Lambers<br/>', '13.12.15', '  Het is wachten op een onderdeel', 1),
+(3, 'fietsje@hotmail.com', 4, '2015-12-13 18:06:06', 4, ' Damm fuck this is happening?', 'aaaaa kkkkk<br/>', '13.12.15', '  yup its happining', 1),
+(4, 'fietsje@hotmail.com', 4, '2015-12-13 18:05:41', 4, ' Mijn computer is stuk en nu kan ik niet meer', 'aaaaa kkkkk<br/>', '13.12.15', '  koop nieuwe pc', 3),
+(5, 'das@gmail.com', 5, '2015-12-13 18:05:35', 1, '  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'Yaron Lambers<br/>', '13.12.15', '  cxxvxvxcvxcvxcvxcv', 1),
+(6, 'das@gmail.com', 5, '2015-12-13 18:01:41', 1, ' ssssssssssssssssssssssssssssssssssssssssssss', NULL, NULL, NULL, 0),
+(7, 'das@gmail.com', 5, '2015-12-13 18:01:45', 1, ' dddddddddddddddddddddddddddddddddddddddddddd', NULL, NULL, NULL, 0),
+(8, 'das@gmail.com', 5, '2015-12-13 18:01:50', 1, ' zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', NULL, NULL, NULL, 0),
+(9, 'das@gmail.com', 5, '2015-12-13 18:03:08', 1, ' dddddddddddddddddddddddddddddddddddddddddddd', 'Yaron Lambers<br/>', '13.12.15', '  dddddddddddddddddddddddddddddddddddddddddddd', 3),
+(10, 'das@gmail.com', 5, '2015-12-13 18:07:26', 4, ' asdasdasdsdddddddddddddddddddddddddddddddddd', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -138,8 +173,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `phone`, `role`, `email`, `password`) VALUES
-(3, 'yaron', 'lambers', 620923399, 2, 'y.lambers@outlook.com', 'c84258e9c39059a89ab77d846ddab909'),
-(4, 'Leonardo', 'Davinci', 547649948, 1, 'fietsje@hotmail.com', 'c84258e9c39059a89ab77d846ddab909');
+(3, 'Yaron', 'Lambers', 620923399, 2, 'y.lambers@outlook.com', 'c84258e9c39059a89ab77d846ddab909'),
+(4, 'Leonardo', 'Davinci', 547649948, 1, 'fietsje@hotmail.com', 'c84258e9c39059a89ab77d846ddab909'),
+(5, 'aaaaa', 'kkkkk', 601111111, 1, 'das@gmail.com', '594f803b380a41396ed63dca39503542');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -183,7 +219,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT voor een tabel `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 --
 -- AUTO_INCREMENT voor een tabel `status`
 --
@@ -193,7 +229,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT voor een tabel `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT voor een tabel `urgentielevel`
 --
@@ -203,7 +239,7 @@ ALTER TABLE `urgentielevel`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
