@@ -47,12 +47,12 @@ $chatId = $_GET['id'];
 $chatQuery = "SELECT * FROM ticket WHERE idticket='$chatId'";
 $chatResult = mysqli_query($db, $chatQuery);
 $row = mysqli_fetch_array($chatResult);
-$idCustomer = $row['idcustomer'];
+$idCustomer = $id;
 
 $userQuery = "SELECT * FROM user WHERE id='$idCustomer'";
 $userResult = mysqli_query($db, $userQuery);
 $rowUser = mysqli_fetch_array($userResult);
-$time = date('Y-m-d H:i');
+$time = date('Y-m-d H:i:s');
 
 if(isset($_POST['chat'])){
     $message = mysqli_real_escape_string($db, $_POST['message']);
@@ -72,14 +72,14 @@ echo '
         <input type="submit" class="form-control" name="chat" value="verzend" />
     ';
 
-$queryMSg = "SELECT * FROM chat WHERE  ticket_id='$chatId' ORDER BY post_time DESC LIMIT 15";
+$queryMSg = "SELECT * FROM chat WHERE  ticket_id='$chatId' ORDER BY post_time DESC";
 $msgResult = mysqli_query($db, $queryMSg);
 $rowinfoUser = mysqli_fetch_array($msgResult);
 
     echo '
         <div class="chat">
     ';
-    echo "Je praat met " . $rowUser['firstname'] . " " . $rowUser['lastname'] . "<br/>";
+//    echo "Je praat met " . $rowUser['firstname'] . " " . $rowUser['lastname'] . "<br/>";
     while ($row = mysqli_fetch_array($msgResult)) {
 
         $userid = $row['user_id'];

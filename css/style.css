@@ -18,9 +18,8 @@ body{
     font-size: 18px;
     color: #ff0000;
 }
-
-.chat .user{
-    color: #333;
+.chat .msg{
+    font-size: 16px;
 }
 
 .menubar{
