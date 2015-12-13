@@ -21,12 +21,11 @@
                     </br>
                     <input type="submit" name="login"  class="btn btn-primary btn-md" value="Login"/>
                     <a href="register.php">
-                        <input type="button" class="btn btn-primary btn-md" value="Registreren"/>
+                        <input type="button" class="btn btn-success" value="Registreren"/>
                     </a>
                 </form>
             </div>
         </div>
     </div>
-
     </body>
 </html>

@@ -21,7 +21,6 @@ if(isset($_POST['login'])){
         $_SESSION['email'] = $email;
         header('location: ticket.php');
     }else{
-        echo 'U heeft een verkeerd wachtwoord ingevoerd';
-        header("Refresh:2; url=../index.php");
+        header("Refresh:0; url=../index.php");
     }
 }
