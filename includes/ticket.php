@@ -63,7 +63,7 @@ if($userRole == 1){
         $error = 0; /* Error is standaard 0 om door de check heen te komen */
 
         /* Validations */
-        if(strlen($description) <= 20){$error++; echo "Graag meer als 20 tekens invoeren" . "<br/>";}
+        if(strlen($description) <= 20){$error++; echo '<div class="error">'.'* Graag meer als 20 tekens invoeren'."</div>";}
 
         if ($error == 0){
             $query = "INSERT INTO ticket (customer, description, idcustomer, urgentieLevel ) VALUES ('$customerEmail', '$description', '$customerId', '$importantLevel' )";

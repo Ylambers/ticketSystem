@@ -54,10 +54,10 @@ if($role == 2){
 
         $error = 0;
 
-        if(strlen($firstname)<3){$error++; echo 'Graag een betere voornaam invoeren';}
-        if(strlen($lastname)<3){$error++; echo 'Graag een betere achternaam invoeren';}
-        if(strlen($phone)<3){$error++; echo 'Graag een beter telefoonnummer invoeren';}
-        if(strlen($email)<3){$error++; echo 'Graag een beter emailadress invoeren';}
+        if(strlen($firstname)<3){$error++; echo '<div class="error">'.'* Graag een betere voornaam invoeren '."</div>";}
+        if(strlen($lastname)<3){$error++; echo '<div class="error">'.'* Graag een betere achternaam invoeren '."</div>";}
+        if(strlen($phone)<3){$error++; echo '<div class="error">'.'* Graag een beter telefoonnummer invoeren'."</div>";}
+        if(strlen($email)<3){$error++; echo '<div class="error">'.'* Graag een beter email adress invoeren'."</div>";}
 
         if ($error == 0){
             $query = "UPDATE user SET firstname='$firstname', lastname='$lastname', phone='$phone',email='$email', role='$level' WHERE id='$id'";

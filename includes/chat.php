@@ -55,47 +55,54 @@ $rowUser = mysqli_fetch_array($userResult);
 $time = date('Y-m-d H:i:s');
 
 if(isset($_POST['chat'])){
+    $error = 0;
     $message = mysqli_real_escape_string($db, $_POST['message']);
     $query = "INSERT INTO chat (message, user_id, ticket_id, post_time) VALUES ('$message', '$idCustomer', '$chatId', '$time')";
-    if (!mysqli_query($db, $query)) {
-        die('Error ' . mysqli_error($db));
-    }else{
-        echo 'Verzonden';
-        $message = '';
+
+    if(strlen($message) < 20){$error++; echo '<div class="error">'.'* Minimaal 20 tekens per bericht'."</div>";}
+
+    if($error == 0){
+        if (!mysqli_query($db, $query)) {
+            die('Error ' . mysqli_error($db));
+        }else{
+            header("refresh:1;");
+        }
     }
 }
 
 echo '
+    <div class="containerForm">
     <form action="" method="post" role="form">
-    <div class="form-group">
-        <textarea class="form-control" name="message" rows="10" placeholder="Verstuur een bericht"></textarea>
-        <input type="submit" class="form-control" name="chat" value="verzend" />
-    ';
+        <div class="form-group">
+            <textarea class="form-control" name="message" rows="10" placeholder="Verstuur een bericht"></textarea>
+            <input type="submit" class="form-control" name="chat" value="verzend" />
+        ';
 
-$queryMSg = "SELECT * FROM chat WHERE  ticket_id='$chatId' ORDER BY post_time DESC";
-$msgResult = mysqli_query($db, $queryMSg);
-$rowinfoUser = mysqli_fetch_array($msgResult);
+    $queryMSg = "SELECT * FROM chat WHERE  ticket_id='$chatId' ORDER BY post_time DESC";
+    $msgResult = mysqli_query($db, $queryMSg);
+    $rowinfoUser = mysqli_fetch_array($msgResult);
 
+        echo '
+            <div class="chat">
+        ';
+    //    echo "Je praat met " . $rowUser['firstname'] . " " . $rowUser['lastname'] . "<br/>";
+        while ($row = mysqli_fetch_array($msgResult)) {
+
+            $userid = $row['user_id'];
+            $queryUser = "SELECT * FROM user WHERE id='$userid' ";
+            $sqlUser = mysqli_query($db, $queryUser);
+            $rowUser = mysqli_fetch_array($sqlUser);
+            $userName = $rowUser['firstname']." ". $rowUser['lastname'];
+
+            echo '<div class="time"> ';
+                echo $row['post_time']. " - <h2> " .$userName . "</h2>";
+            echo '</div>';
+            echo '<div class="msg">';
+                echo $row['message']."<br/>";
+            echo '</div>';
+        }
     echo '
-        <div class="chat">
-    ';
-//    echo "Je praat met " . $rowUser['firstname'] . " " . $rowUser['lastname'] . "<br/>";
-    while ($row = mysqli_fetch_array($msgResult)) {
-
-        $userid = $row['user_id'];
-        $queryUser = "SELECT * FROM user WHERE id='$userid' ";
-        $sqlUser = mysqli_query($db, $queryUser);
-        $rowUser = mysqli_fetch_array($sqlUser);
-        $userName = $rowUser['firstname']." ". $rowUser['lastname'];
-
-        echo '<div class="time"> ';
-            echo $row['post_time']. " - <h2> " .$userName . "</h2>";
-        echo '</div>';
-        echo '<div class="msg">';
-            echo $row['message']."<br/>";
-        echo '</div>';
-    }
-    echo '
+            </div>
         </div>
     ';
 

@@ -38,13 +38,13 @@ if (isset($_POST['register'])) {
     $userEmail = $rowUsers['email'];
 
     $error = 0;
-    if(strlen($firstname) < 3){$error++; echo' De Voornaam is te kort!'."<br/>" ;}
-    if(strlen($lastname) < 3){$error++; echo' De achternaam is te kort!'."<br/>";}
-    if(strlen($phone) < 3){$error++; echo' Het telefoonnummer is te kort!'."<br/>";}
-    if(strlen($email) < 3){$error++; echo' Het emailadres is te kort!'."<br/>";}
-    if(count($userEmail) > 0){$error++; echo 'Dit email adres bestaat al!' ."<br/>";}
-    if($password != $password1){$error++; echo'De wachtwoorden zijn niet gelijk!'."<br/>";}
-    if(strlen($password) <= 3){$error++; echo'Het wachtwoord is te kort';}
+    if(strlen($firstname) < 3){$error++; echo '<div class="error">'.'* Voornaam is tekort'."</div>";}
+    if(strlen($lastname) < 3){$error++; echo '<div class="error">'.'* Achternaam is tekort '."</div>";}
+    if(strlen($phone) < 3){$error++; echo '<div class="error">'.'* Telefoonnummer is tekort'."</div>";}
+    if(strlen($email) < 3){$error++; echo '<div class="error">'.'* Email adress is tekort '."</div>";}
+    if(count($userEmail) > 0){$error++; echo '<div class="error">'.'* Email adres bestaat al'."</div>";}
+    if($password != $password1){$error++; echo '<div class="error">'.'* De wachtwoorden zijn niet gelijk '."</div>";}
+    if(strlen($password) <= 3){$error++; echo '<div class="error">'.'* Het wachtwoord is te kort '."</div>";}
 
     if($password == $password1){
         $pass = md5($password);

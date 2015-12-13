@@ -63,8 +63,8 @@ if ($role == 2){
         $date = date("d.m.y");
         $sqlDate = date('d.m.y', strtotime($date));
 
-        if(strlen($ticketSolution) < 10){$error++; echo "Graag een oplossing in voeren! Minimaal 10 tekens". "<br/>";}
-        if(empty($ticketStatus)){$error++; echo "Graag een ticketstatus invoeren!". "<br/>";}
+        if(strlen($ticketSolution) < 10){$error++; echo '<div class="error">'.'* Graag een betere oplossing invoeren '."</div>";}
+        if(empty($ticketStatus)){$error++; echo '<div class="error">'.'* Graag een status meegeven '."</div>";}
 
         $updateTicket = "UPDATE ticket SET solution='$ticketSolution', active='$ticketStatus', employee='$userName', fixed_at='$sqlDate'  WHERE idticket='$id'  ";
         if($error == 0){
