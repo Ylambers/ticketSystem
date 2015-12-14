@@ -142,7 +142,7 @@ if($userRole == 1){
 }
 
 if($userRole == 2){
-    $queryTicket = "SELECT * FROM ticket  ORDER BY created_at ";
+    $queryTicket = "SELECT * FROM ticket ORDER BY created_at ";
     $resultTicket = mysqli_query($db, $queryTicket);
 
     $urgentieLevelQuery = "SELECT * FROM urgentieLevel";

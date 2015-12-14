@@ -31,7 +31,6 @@ if ($role == 2){
     $roleName = 'Gebruiker';
 }
 
-
 if(!empty($_SESSION['email'])){
     echo '<div class="menubar">';
     echo "<h2>"."Welkom ". $userName."</h2>"."<br/>";
@@ -65,7 +64,6 @@ if(isset($_POST['chat'])){
         if (!mysqli_query($db, $query)) {
             die('Error ' . mysqli_error($db));
         }else{
-            $message = '';
             header("refresh:2;");
         }
     }
@@ -77,11 +75,11 @@ echo '
         <div class="form-group">
             <textarea class="form-control" name="message" rows="10" placeholder="Verstuur een bericht"></textarea>
             <input type="submit" class="form-control" name="chat" value="verzend" />
+    </form>
         ';
 
     $queryMSg = "SELECT * FROM chat WHERE  ticket_id='$chatId' ORDER BY post_time DESC";
     $msgResult = mysqli_query($db, $queryMSg);
-    $rowinfoUser = mysqli_fetch_array($msgResult);
 
         echo '
             <div class="chat">
@@ -100,6 +98,7 @@ echo '
             echo '</div>';
             echo '<div class="msg">';
                 echo $row['message']."<br/>";
+                echo $row['id']."<br/>";
             echo '</div>';
         }
     echo '
