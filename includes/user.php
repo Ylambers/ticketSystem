@@ -29,6 +29,8 @@ if ($role == 2){
     $roleName = 'Admin';
 }elseif($role == 1){
     $roleName = 'Gebruiker';
+}else{
+    $roleName = 'User heeft geen rechten';
 }
 
 if(!empty($_SESSION['email'])){
