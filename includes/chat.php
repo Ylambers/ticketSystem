@@ -98,7 +98,6 @@ echo '
             echo '</div>';
             echo '<div class="msg">';
                 echo $row['message']."<br/>";
-                echo $row['id']."<br/>";
             echo '</div>';
         }
     echo '
